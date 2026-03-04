@@ -11,12 +11,12 @@ tape_types:
   - name: "Type II (Chrome)"
     value: "type_ii"
     available: true
-    cost: "$3"
+    cost: "$2"
   
   - name: "Type IV (Metal)"
     value: "type_iv"
     available: false
-    cost: "$8"
+    cost: "$10"
 
 # Dolby noise reduction options you can provide
 dolby_options:

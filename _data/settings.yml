@@ -4,22 +4,22 @@
 owner:
   name: "Your Name"
   email: "your.email@example.com"
-  bio: "Music enthusiast sharing mixtapes since 1995. Specializing in indie rock, post-punk, and ambient soundscapes."
+  bio: "Music enthusiast sharing mixtapes since 199X. Specializing in indie rock, post-punk, and ambient soundscapes."
 
 # Exchange policy
 policy:
-  description: "I'm happy to share tapes with fellow enthusiasts! Please read the guidelines below."
+  description: "I'm happy to copy and exchange tapes with fellow enthusiasts! Please read the guidelines below."
   guidelines:
-    - "Tapes are lent for 2-4 weeks at a time"
-    - "Return shipping is your responsibility"
-    - "Please handle with care and rewind after listening"
-    - "Not all tapes are available for loan - check individual tape status"
+    - "I will ship to X, Y, and Z countries"
+    - "Allow 2-4 weeks for processing and shipping"
+    - "I prefer 1:1 tape exchanges. If you don't have tapes to exchange, I can provide blank tapes for a small fee (see charges below)"
   
   # Monetary policy for special tape types
   charges:
-    type_ii: "$3 for Type II (chrome) blank tape cost"
-    type_iv: "$8 for Type IV (metal) blank tape cost"
-    shipping: "Borrower covers return shipping"
+    type_i: "Free for Type I (normal/ferric) per tape"
+    type_ii: "$2 for Type II (chrome) per tape (or free for exchanges)"
+    type_iv: "Not available"
+    shipping: "I ship media mail or USPS ground, which is usually around $5-$10 depending on location and tape quantity. For exchanges we each cover our own costs."
 
 # Theme customization
 theme:

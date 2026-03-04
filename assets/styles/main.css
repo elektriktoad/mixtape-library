@@ -254,7 +254,7 @@ main {
 
 .tape-image-wrapper {
   position: relative;
-  aspect-ratio: 1;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
   background-color: var(--color-gray-light);
 }

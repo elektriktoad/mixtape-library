@@ -12,19 +12,39 @@
   }
   
   // ========================================
+  // Local Storage Helpers
+  // ========================================
+  
+  function getSelectedTapesFromStorage() {
+    try {
+      const data = localStorage.getItem('mixtape_selected_tapes');
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      console.error('Error loading selected tapes:', e);
+      return [];
+    }
+  }
+  
+  function saveSelectedTapesToStorage(tapes) {
+    try {
+      localStorage.setItem('mixtape_selected_tapes', JSON.stringify(tapes));
+    } catch (e) {
+      console.error('Error saving selected tapes:', e);
+    }
+  }
+  
+  // ========================================
   // Load Selected Tapes
   // ========================================
   
   function loadSelectedTapes() {
-    const selectedTapes = window.MixtapeLibrary 
-      ? window.MixtapeLibrary.getSelectedTapes() 
-      : [];
+    const selectedTapes = getSelectedTapesFromStorage();
     
     const container = document.getElementById('selected-tapes-list');
     if (!container) return;
     
     if (selectedTapes.length === 0) {
-      container.innerHTML = '<p class="empty-message">No tapes selected. <a href="/">Browse the catalog</a> to add tapes to your request.</p>';
+      container.innerHTML = '<p class="empty-message">No tapes selected. <a href="{{ "/" | relative_url }}">Browse the catalog</a> to add tapes to your request.</p>';
       return;
     }
     
@@ -44,11 +64,9 @@
   function handleRemoveTape(event) {
     const slug = event.target.dataset.slug;
     
-    if (window.MixtapeLibrary) {
-      let selectedTapes = window.MixtapeLibrary.getSelectedTapes();
-      selectedTapes = selectedTapes.filter(tape => tape.slug !== slug);
-      window.MixtapeLibrary.saveSelectedTapes(selectedTapes);
-    }
+    let selectedTapes = getSelectedTapesFromStorage();
+    selectedTapes = selectedTapes.filter(tape => tape.slug !== slug);
+    saveSelectedTapesToStorage(selectedTapes);
     
     loadSelectedTapes();
   }
@@ -95,17 +113,23 @@
     const formContainer = document.querySelector('.request-form-container');
     const openEmailBtn = document.getElementById('open-email');
     
+    // Hide form first
+    if (formContainer) {
+      formContainer.style.display = 'none';
+    }
+    
+    // Set the output text
     if (outputText) {
       outputText.textContent = requestText;
     }
     
+    // Show output section
     if (outputSection) {
       outputSection.style.display = 'block';
-      outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    
-    if (formContainer) {
-      formContainer.style.display = 'none';
+      // Scroll after brief delay to ensure layout is updated
+      setTimeout(() => {
+        outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
     }
     
     // Update mailto link
@@ -118,9 +142,7 @@
   }
   
   function buildRequestText() {
-    const selectedTapes = window.MixtapeLibrary 
-      ? window.MixtapeLibrary.getSelectedTapes() 
-      : [];
+    const selectedTapes = getSelectedTapesFromStorage();
     
     // Get form values
     const name = document.getElementById('requester-name').value.trim();
