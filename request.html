@@ -43,7 +43,7 @@ title: Request Tapes
   <div class="creator-preferences">
     <h2>What {{ site.data.settings.owner.name }} Loves</h2>
     <p class="preferences-intro">To help you know what to make in exchange, here's what {{ site.data.settings.owner.name }} enjoys:</p>
-    <div class="preferences-list">
+    <div class="preferences-list preferences-columns">
       <div class="preference-item">
         <h4>Favorite Genres & Artists</h4>
         <ul>
@@ -135,7 +135,7 @@ title: Request Tapes
         
         <div class="form-group">
           <label for="custom-genres">Genre(s)</label>
-          <div class="checkbox-group">
+          <div class="checkbox-group checkbox-columns">
             {% for genre in site.data.tape_options.genres %}
             <label class="checkbox-label">
               <input type="checkbox" name="custom-genre" value="{{ genre }}">

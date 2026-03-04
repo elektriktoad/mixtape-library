@@ -22,7 +22,6 @@ owner:
   # Dolby options you prefer to receive (use values from tape_options.yml)
   preferred_dolby_options:
     - "none"
-    - "dolby_b"
 
 # Exchange policy
 policy:
