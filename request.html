@@ -37,6 +37,38 @@ title: Request Tapes
     </div>
   </div>
   
+  <!-- Creator's Mixtape Preferences -->
+  <div class="creator-preferences">
+    <h2>What {{ site.data.settings.owner.name }} Loves</h2>
+    <p class="preferences-intro">To help you know what to make in exchange, here's what {{ site.data.settings.owner.name }} enjoys:</p>
+    <div class="preferences-list">
+      <div class="preference-item">
+        <h4>Favorite Genres</h4>
+        <p>{{ site.data.settings.owner.bio }}</p>
+      </div>
+      <div class="preference-item">
+        <h4>Preferred Tape Types</h4>
+        <ul>
+          {% for tape_type in site.data.tape_options.tape_types %}
+            {% if tape_type.available %}
+            <li>{{ tape_type.name }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="preference-item">
+        <h4>Dolby NR Preferences</h4>
+        <ul>
+          {% for dolby in site.data.tape_options.dolby_options %}
+            {% if dolby.available %}
+            <li>{{ dolby.name }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <div class="request-form-container">
     <h2>Build Your Request</h2>
     
@@ -44,8 +76,35 @@ title: Request Tapes
       <!-- Selected Tapes Section -->
       <section class="form-section">
         <h3>Selected Tapes from Catalog</h3>
+        <p class="section-description">Specify your preferred format for each tape.</p>
         <div id="selected-tapes-list" class="selected-tapes-list">
           <p class="empty-message">No tapes selected. <a href="{{ '/' | relative_url }}">Browse the catalog</a> to add tapes to your request.</p>
+        </div>
+      </section>
+      
+      <!-- What You Can Make -->
+      <section class="form-section">
+        <h3>What You Can Make</h3>
+        <p class="section-description">Let {{ site.data.settings.owner.name }} know what genres or styles you enjoy making, so they can request tapes in exchange that match your skills!</p>
+        
+        <div class="form-group">
+          <label for="your-genres">Genres You Can Make</label>
+          <div class="checkbox-group">
+            {% for genre in site.data.tape_options.genres %}
+            <label class="checkbox-label">
+              <input type="checkbox" name="your-genre" value="{{ genre }}">
+              <span>{{ genre }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="your-notes">Any Other Notes About Your Skills</label>
+          <textarea id="your-notes" 
+                    name="your-notes" 
+                    rows="3" 
+                    placeholder="E.g., 'I have access to Type II blanks' or 'I specialize in 80s music'"></textarea>
         </div>
       </section>
       

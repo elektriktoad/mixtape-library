@@ -48,10 +48,49 @@
       return;
     }
     
+    // Get tape options from page data attributes (Jekyll injects them)
+    const tapeTypesJson = document.documentElement.getAttribute('data-tape-types') || '[]';
+    const dolbyOptionsJson = document.documentElement.getAttribute('data-dolby-options') || '[]';
+    
+    let tapeTypes = [];
+    let dolbyOptions = [];
+    
+    try {
+      tapeTypes = JSON.parse(tapeTypesJson);
+      dolbyOptions = JSON.parse(dolbyOptionsJson);
+    } catch (e) {
+      console.warn('Could not parse tape options from page');
+    }
+    
     container.innerHTML = selectedTapes.map(tape => `
       <div class="selected-tape-item" data-slug="${tape.slug}">
-        <span><strong>${tape.title}</strong></span>
-        <button type="button" class="remove-tape" data-slug="${tape.slug}" title="Remove">×</button>
+        <div class="tape-title-row">
+          <span><strong>${tape.title}</strong></span>
+          <button type="button" class="remove-tape" data-slug="${tape.slug}" title="Remove">×</button>
+        </div>
+        
+        <div class="tape-options-row">
+          <div class="option-group">
+            <label for="tape-type-${tape.slug}">Tape Type (optional)</label>
+            <select id="tape-type-${tape.slug}" class="tape-type-select" data-slug="${tape.slug}">
+              <option value="">No preference</option>
+              <option value="Type I">Type I (Normal/Ferric)</option>
+              <option value="Type II">Type II (Chrome)</option>
+              <option value="Type IV">Type IV (Metal)</option>
+            </select>
+          </div>
+          
+          <div class="option-group">
+            <label for="dolby-${tape.slug}">Dolby NR (optional)</label>
+            <select id="dolby-${tape.slug}" class="dolby-select" data-slug="${tape.slug}">
+              <option value="">No preference</option>
+              <option value="none">No Dolby NR</option>
+              <option value="Dolby B">Dolby B</option>
+              <option value="Dolby C">Dolby C</option>
+              <option value="Dolby S">Dolby S</option>
+            </select>
+          </div>
+        </div>
       </div>
     `).join('');
     
@@ -151,6 +190,11 @@
     const address = document.getElementById('return-address').value.trim();
     const notes = document.getElementById('additional-notes').value.trim();
     
+    // What requestor can make
+    const yourGenres = Array.from(document.querySelectorAll('input[name="your-genre"]:checked'))
+      .map(cb => cb.value);
+    const yourNotes = document.getElementById('your-notes').value.trim();
+    
     // Custom tape request
     const customLength = document.getElementById('custom-length').value;
     const customGenres = Array.from(document.querySelectorAll('input[name="custom-genre"]:checked'))
@@ -163,7 +207,7 @@
     
     // Build the email text
     let text = '='.repeat(60) + '\n';
-    text += 'MIXTAPE LOAN REQUEST\n';
+    text += 'MIXTAPE REQUEST\n';
     text += '='.repeat(60) + '\n\n';
     
     text += 'FROM:\n';
@@ -180,6 +224,18 @@
       text += 'REQUESTED TAPES FROM CATALOG:\n\n';
       selectedTapes.forEach((tape, index) => {
         text += `  ${index + 1}. ${tape.title}\n`;
+        
+        // Get per-tape selections
+        const tapeTypeSelect = document.getElementById(`tape-type-${tape.slug}`);
+        const dolbySelect = document.getElementById(`dolby-${tape.slug}`);
+        
+        if (tapeTypeSelect && tapeTypeSelect.value) {
+          text += `     Tape Type: ${tapeTypeSelect.value}\n`;
+        }
+        
+        if (dolbySelect && dolbySelect.value) {
+          text += `     Dolby NR: ${dolbySelect.value}\n`;
+        }
       });
       text += '\n' + '-'.repeat(60) + '\n\n';
     }
@@ -209,6 +265,22 @@
     text += `  Tape Type: ${formatPreference(tapeTypePref)}\n`;
     text += `  Dolby NR: ${formatPreference(dolbyPref)}\n`;
     text += '\n' + '-'.repeat(60) + '\n\n';
+    
+    // What you can make
+    if (yourGenres.length > 0 || yourNotes) {
+      text += 'WHAT YOU CAN MAKE (for exchange):\n\n';
+      
+      if (yourGenres.length > 0) {
+        text += `  Genres: ${yourGenres.join(', ')}\n`;
+      }
+      
+      if (yourNotes) {
+        text += `  Notes/Special Skills:\n`;
+        text += yourNotes.split('\n').map(line => `    ${line}`).join('\n') + '\n';
+      }
+      
+      text += '\n' + '-'.repeat(60) + '\n\n';
+    }
     
     // Additional notes
     if (notes) {
