@@ -1,0 +1,38 @@
+# Mixtape Library Template
+# Jekyll configuration
+
+title: "Mixtape Library"
+description: "A catalog of cassette mixtapes available for borrowing"
+baseurl: "" # Leave empty for user's GitHub Pages URL
+url: "" # Will be set by GitHub Pages
+
+# Collections
+collections:
+  tapes:
+    output: true
+    permalink: /tape/:slug/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "tapes"
+    values:
+      layout: "tape"
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+
+# Include
+include:
+  - _data

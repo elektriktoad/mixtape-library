@@ -1,0 +1,199 @@
+---
+layout: default
+title: Request Tapes
+---
+
+<div class="request-page">
+  <h1>Request Tapes</h1>
+  
+  <div class="request-intro">
+    <p>{{ site.data.settings.policy.description }}</p>
+    
+    <div class="policy-guidelines">
+      <h3>Guidelines</h3>
+      <ul>
+        {% for guideline in site.data.settings.policy.guidelines %}
+        <li>{{ guideline }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    
+    <div class="policy-charges">
+      <h3>Costs</h3>
+      <ul>
+        {% if site.data.settings.policy.charges.type_ii %}
+        <li><strong>Type II tapes:</strong> {{ site.data.settings.policy.charges.type_ii }}</li>
+        {% endif %}
+        {% if site.data.settings.policy.charges.type_iv %}
+        <li><strong>Type IV tapes:</strong> {{ site.data.settings.policy.charges.type_iv }}</li>
+        {% endif %}
+        {% if site.data.settings.policy.charges.shipping %}
+        <li><strong>Shipping:</strong> {{ site.data.settings.policy.charges.shipping }}</li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  
+  <div class="request-form-container">
+    <h2>Build Your Request</h2>
+    
+    <form id="request-form" class="request-form">
+      <!-- Selected Tapes Section -->
+      <section class="form-section">
+        <h3>Selected Tapes from Catalog</h3>
+        <div id="selected-tapes-list" class="selected-tapes-list">
+          <p class="empty-message">No tapes selected. <a href="{{ '/' | relative_url }}">Browse the catalog</a> to add tapes to your request.</p>
+        </div>
+      </section>
+      
+      <!-- Custom Tape Request -->
+      <section class="form-section">
+        <h3>Request a Custom Tape</h3>
+        <p class="section-description">If you'd like a custom mixtape, fill out the details below.</p>
+        
+        <div class="form-group">
+          <label for="custom-length">Preferred Length</label>
+          <select id="custom-length" name="custom-length">
+            <option value="">Select length (optional)</option>
+            {% for length in site.data.tape_options.tape_lengths %}
+            <option value="{{ length }}">{{ length }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="custom-genres">Genre(s)</label>
+          <div class="checkbox-group">
+            {% for genre in site.data.tape_options.genres %}
+            <label class="checkbox-label">
+              <input type="checkbox" name="custom-genre" value="{{ genre }}">
+              <span>{{ genre }}</span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="custom-inspiration">Inspiration (Artists/Albums/Moods)</label>
+          <textarea id="custom-inspiration" 
+                    name="custom-inspiration" 
+                    rows="4" 
+                    placeholder="E.g., 'Something like Radiohead's OK Computer, but more upbeat' or 'Chill electronic music for studying'"></textarea>
+        </div>
+      </section>
+      
+      <!-- Tape Type Preferences -->
+      <section class="form-section">
+        <h3>Tape Preferences</h3>
+        
+        <div class="form-group">
+          <label>Preferred Tape Type</label>
+          <div class="radio-group">
+            {% for tape_type in site.data.tape_options.tape_types %}
+            <label class="radio-label {% unless tape_type.available %}disabled{% endunless %}">
+              <input type="radio" 
+                     name="tape-type-pref" 
+                     value="{{ tape_type.value }}"
+                     {% unless tape_type.available %}disabled{% endunless %}>
+              <span>{{ tape_type.name }} <em>({{ tape_type.cost }})</em></span>
+            </label>
+            {% endfor %}
+            <label class="radio-label">
+              <input type="radio" name="tape-type-pref" value="no-preference" checked>
+              <span>No preference</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Preferred Dolby Noise Reduction</label>
+          <div class="radio-group">
+            {% for dolby in site.data.tape_options.dolby_options %}
+            <label class="radio-label {% unless dolby.available %}disabled{% endunless %}">
+              <input type="radio" 
+                     name="dolby-pref" 
+                     value="{{ dolby.value }}"
+                     {% unless dolby.available %}disabled{% endunless %}>
+              <span>{{ dolby.name }}</span>
+            </label>
+            {% endfor %}
+            <label class="radio-label">
+              <input type="radio" name="dolby-pref" value="no-preference" checked>
+              <span>No preference</span>
+            </label>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Contact Info -->
+      <section class="form-section">
+        <h3>Your Information</h3>
+        
+        <div class="form-group">
+          <label for="requester-name">Your Name *</label>
+          <input type="text" 
+                 id="requester-name" 
+                 name="requester-name" 
+                 required 
+                 placeholder="Your full name">
+        </div>
+        
+        <div class="form-group">
+          <label for="requester-email">Your Email *</label>
+          <input type="email" 
+                 id="requester-email" 
+                 name="requester-email" 
+                 required 
+                 placeholder="your.email@example.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="return-address">Return Mailing Address *</label>
+          <textarea id="return-address" 
+                    name="return-address" 
+                    rows="4" 
+                    required
+                    placeholder="Street Address&#10;City, State ZIP&#10;Country"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="additional-notes">Additional Notes</label>
+          <textarea id="additional-notes" 
+                    name="additional-notes" 
+                    rows="3" 
+                    placeholder="Any special requests or information"></textarea>
+        </div>
+      </section>
+      
+      <div class="form-actions">
+        <button type="button" id="generate-request" class="btn-primary btn-large">
+          Generate Request Email
+        </button>
+      </div>
+    </form>
+    
+    <!-- Generated Output -->
+    <div id="output-section" class="output-section" style="display: none;">
+      <h3>Your Request Email</h3>
+      <p class="output-instructions">Copy the text below and send it to <strong>{{ site.data.settings.owner.email }}</strong></p>
+      
+      <div class="output-container">
+        <pre id="output-text" class="output-text"></pre>
+      </div>
+      
+      <div class="output-actions">
+        <button type="button" id="copy-output" class="btn-primary">
+          Copy to Clipboard
+        </button>
+        <button type="button" id="edit-request" class="btn-secondary">
+          Edit Request
+        </button>
+        <a href="mailto:{{ site.data.settings.owner.email }}" id="open-email" class="btn-secondary">
+          Open in Email Client
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ '/assets/scripts/request.js' | relative_url }}"></script>

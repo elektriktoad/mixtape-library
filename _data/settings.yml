@@ -1,0 +1,44 @@
+# Site owner settings
+# Customize these values to personalize your mixtape library
+
+owner:
+  name: "Your Name"
+  email: "your.email@example.com"
+  bio: "Music enthusiast sharing mixtapes since 1995. Specializing in indie rock, post-punk, and ambient soundscapes."
+
+# Exchange policy
+policy:
+  description: "I'm happy to share tapes with fellow enthusiasts! Please read the guidelines below."
+  guidelines:
+    - "Tapes are lent for 2-4 weeks at a time"
+    - "Return shipping is your responsibility"
+    - "Please handle with care and rewind after listening"
+    - "Not all tapes are available for loan - check individual tape status"
+  
+  # Monetary policy for special tape types
+  charges:
+    type_ii: "$3 for Type II (chrome) blank tape cost"
+    type_iv: "$8 for Type IV (metal) blank tape cost"
+    shipping: "Borrower covers return shipping"
+
+# Theme customization
+theme:
+  primary_color: "#e63946"
+  secondary_color: "#457b9d"
+  background_color: "#f1faee"
+  text_color: "#1d3557"
+  accent_color: "#a8dadc"
+  
+  # Optional: header image URL (leave empty for solid color header)
+  header_image: ""
+  
+  # Font choices (Google Fonts or system fonts)
+  heading_font: "'Courier New', monospace"
+  body_font: "'Helvetica Neue', Arial, sans-serif"
+
+# Site metadata
+site:
+  show_tape_count: true
+  tapes_per_row: 4  # For catalog grid view
+  enable_search: true
+  enable_filtering: true

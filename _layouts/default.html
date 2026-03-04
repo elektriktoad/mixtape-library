@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  
+  <link rel="stylesheet" href="{{ '/assets/styles/main.css' | relative_url }}">
+  
+  {% seo %}
+  {% feed_meta %}
+  
+  <style>
+    :root {
+      --color-primary: {{ site.data.settings.theme.primary_color }};
+      --color-secondary: {{ site.data.settings.theme.secondary_color }};
+      --color-background: {{ site.data.settings.theme.background_color }};
+      --color-text: {{ site.data.settings.theme.text_color }};
+      --color-accent: {{ site.data.settings.theme.accent_color }};
+      --font-heading: {{ site.data.settings.theme.heading_font }};
+      --font-body: {{ site.data.settings.theme.body_font }};
+    }
+  </style>
+</head>
+<body>
+  <nav class="main-nav">
+    <div class="container">
+      <a href="{{ '/' | relative_url }}" class="nav-logo">{{ site.title }}</a>
+      <ul class="nav-links">
+        <li><a href="{{ '/' | relative_url }}">Catalog</a></li>
+        <li><a href="{{ '/request.html' | relative_url }}">Request Tapes</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <main class="container">
+    {{ content }}
+  </main>
+  
+  <footer class="main-footer">
+    <div class="container">
+      <p>&copy; {{ 'now' | date: "%Y" }} {{ site.data.settings.owner.name }}. 
+         Built with the <a href="https://github.com/yourusername/mixtape-library-template">Mixtape Library Template</a>.</p>
+    </div>
+  </footer>
+</body>
+</html>

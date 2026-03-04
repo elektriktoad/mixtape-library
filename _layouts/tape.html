@@ -1,0 +1,104 @@
+---
+layout: default
+---
+
+<article class="tape-detail">
+  <div class="tape-detail-header">
+    <a href="{{ '/' | relative_url }}" class="back-link">&larr; Back to Catalog</a>
+    
+    <div class="tape-detail-content">
+      <div class="tape-detail-images">
+        {% if page.front_image %}
+        <div class="tape-image-large">
+          <img src="{{ '/images/' | append: page.front_image | relative_url }}" 
+               alt="{{ page.title }} - Front">
+          <p class="image-caption">Front</p>
+        </div>
+        {% endif %}
+        
+        {% if page.back_image %}
+        <div class="tape-image-large">
+          <img src="{{ '/images/' | append: page.back_image | relative_url }}" 
+               alt="{{ page.title }} - Back">
+          <p class="image-caption">Back</p>
+        </div>
+        {% endif %}
+        
+        {% unless page.front_image or page.back_image %}
+        <div class="tape-placeholder-large">
+          <span>No Image Available</span>
+        </div>
+        {% endunless %}
+      </div>
+      
+      <div class="tape-detail-info">
+        <h1>{{ page.title }}</h1>
+        
+        <div class="tape-metadata">
+          <div class="metadata-item">
+            <span class="metadata-label">Source</span>
+            <span class="metadata-value">{{ page.author }}</span>
+          </div>
+          
+          <div class="metadata-item">
+            <span class="metadata-label">Length</span>
+            <span class="metadata-value">{{ page.length }}</span>
+          </div>
+          
+          <div class="metadata-item">
+            <span class="metadata-label">Genre</span>
+            <span class="metadata-value">{{ page.genre }}</span>
+          </div>
+          
+          <div class="metadata-item">
+            <span class="metadata-label">Tape Type</span>
+            <span class="metadata-value">{{ page.tape_type }}</span>
+          </div>
+          
+          <div class="metadata-item">
+            <span class="metadata-label">Dolby NR</span>
+            <span class="metadata-value">{{ page.dolby }}</span>
+          </div>
+          
+          <div class="metadata-item">
+            <span class="metadata-label">Status</span>
+            {% if page.requestable %}
+            <span class="metadata-value status-available">Available for loan</span>
+            {% else %}
+            <span class="metadata-value status-unavailable">Not available</span>
+            {% endif %}
+          </div>
+        </div>
+        
+        <div class="tape-description">
+          <h2>Description</h2>
+          <p>{{ page.description }}</p>
+        </div>
+        
+        {% if page.requestable %}
+        <div class="tape-request-action">
+          <label class="request-checkbox-label large">
+            <input type="checkbox" 
+                   class="request-checkbox" 
+                   data-tape-title="{{ page.title }}"
+                   data-tape-slug="{{ page.slug }}">
+            <span>Add to Request</span>
+          </label>
+          <a href="{{ '/request.html' | relative_url }}" class="btn-primary">Go to Request Page</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  
+  <div class="tape-tracklist-section">
+    <h2>Tracklist</h2>
+    <ol class="tracklist">
+      {% for track in page.tracklist %}
+      <li>{{ track }}</li>
+      {% endfor %}
+    </ol>
+  </div>
+</article>
+
+<script src="{{ '/assets/scripts/catalog.js' | relative_url }}"></script>

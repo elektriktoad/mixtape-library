@@ -1,0 +1,274 @@
+// request.js - Handles request form generation and email output
+
+(function() {
+  'use strict';
+  
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', init);
+  
+  function init() {
+    loadSelectedTapes();
+    setupFormHandlers();
+  }
+  
+  // ========================================
+  // Load Selected Tapes
+  // ========================================
+  
+  function loadSelectedTapes() {
+    const selectedTapes = window.MixtapeLibrary 
+      ? window.MixtapeLibrary.getSelectedTapes() 
+      : [];
+    
+    const container = document.getElementById('selected-tapes-list');
+    if (!container) return;
+    
+    if (selectedTapes.length === 0) {
+      container.innerHTML = '<p class="empty-message">No tapes selected. <a href="/">Browse the catalog</a> to add tapes to your request.</p>';
+      return;
+    }
+    
+    container.innerHTML = selectedTapes.map(tape => `
+      <div class="selected-tape-item" data-slug="${tape.slug}">
+        <span><strong>${tape.title}</strong></span>
+        <button type="button" class="remove-tape" data-slug="${tape.slug}" title="Remove">×</button>
+      </div>
+    `).join('');
+    
+    // Setup remove buttons
+    container.querySelectorAll('.remove-tape').forEach(btn => {
+      btn.addEventListener('click', handleRemoveTape);
+    });
+  }
+  
+  function handleRemoveTape(event) {
+    const slug = event.target.dataset.slug;
+    
+    if (window.MixtapeLibrary) {
+      let selectedTapes = window.MixtapeLibrary.getSelectedTapes();
+      selectedTapes = selectedTapes.filter(tape => tape.slug !== slug);
+      window.MixtapeLibrary.saveSelectedTapes(selectedTapes);
+    }
+    
+    loadSelectedTapes();
+  }
+  
+  // ========================================
+  // Form Handlers
+  // ========================================
+  
+  function setupFormHandlers() {
+    const generateBtn = document.getElementById('generate-request');
+    const copyBtn = document.getElementById('copy-output');
+    const editBtn = document.getElementById('edit-request');
+    
+    if (generateBtn) {
+      generateBtn.addEventListener('click', generateRequest);
+    }
+    
+    if (copyBtn) {
+      copyBtn.addEventListener('click', copyToClipboard);
+    }
+    
+    if (editBtn) {
+      editBtn.addEventListener('click', editRequest);
+    }
+  }
+  
+  function generateRequest() {
+    // Validate required fields
+    const name = document.getElementById('requester-name').value.trim();
+    const email = document.getElementById('requester-email').value.trim();
+    const address = document.getElementById('return-address').value.trim();
+    
+    if (!name || !email || !address) {
+      alert('Please fill in all required fields (Name, Email, and Return Address).');
+      return;
+    }
+    
+    // Build the request text
+    const requestText = buildRequestText();
+    
+    // Display output
+    const outputSection = document.getElementById('output-section');
+    const outputText = document.getElementById('output-text');
+    const formContainer = document.querySelector('.request-form-container');
+    const openEmailBtn = document.getElementById('open-email');
+    
+    if (outputText) {
+      outputText.textContent = requestText;
+    }
+    
+    if (outputSection) {
+      outputSection.style.display = 'block';
+      outputSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    if (formContainer) {
+      formContainer.style.display = 'none';
+    }
+    
+    // Update mailto link
+    if (openEmailBtn) {
+      const subject = encodeURIComponent('Mixtape Request from ' + name);
+      const body = encodeURIComponent(requestText);
+      const ownerEmail = openEmailBtn.href.match(/mailto:([^?]+)/)?.[1] || '';
+      openEmailBtn.href = `mailto:${ownerEmail}?subject=${subject}&body=${body}`;
+    }
+  }
+  
+  function buildRequestText() {
+    const selectedTapes = window.MixtapeLibrary 
+      ? window.MixtapeLibrary.getSelectedTapes() 
+      : [];
+    
+    // Get form values
+    const name = document.getElementById('requester-name').value.trim();
+    const email = document.getElementById('requester-email').value.trim();
+    const address = document.getElementById('return-address').value.trim();
+    const notes = document.getElementById('additional-notes').value.trim();
+    
+    // Custom tape request
+    const customLength = document.getElementById('custom-length').value;
+    const customGenres = Array.from(document.querySelectorAll('input[name="custom-genre"]:checked'))
+      .map(cb => cb.value);
+    const customInspiration = document.getElementById('custom-inspiration').value.trim();
+    
+    // Tape preferences
+    const tapeTypePref = document.querySelector('input[name="tape-type-pref"]:checked')?.value || 'no-preference';
+    const dolbyPref = document.querySelector('input[name="dolby-pref"]:checked')?.value || 'no-preference';
+    
+    // Build the email text
+    let text = '='.repeat(60) + '\n';
+    text += 'MIXTAPE LOAN REQUEST\n';
+    text += '='.repeat(60) + '\n\n';
+    
+    text += 'FROM:\n';
+    text += `  Name: ${name}\n`;
+    text += `  Email: ${email}\n\n`;
+    
+    text += 'RETURN ADDRESS:\n';
+    text += address.split('\n').map(line => `  ${line}`).join('\n') + '\n\n';
+    
+    text += '-'.repeat(60) + '\n\n';
+    
+    // Selected tapes from catalog
+    if (selectedTapes.length > 0) {
+      text += 'REQUESTED TAPES FROM CATALOG:\n\n';
+      selectedTapes.forEach((tape, index) => {
+        text += `  ${index + 1}. ${tape.title}\n`;
+      });
+      text += '\n' + '-'.repeat(60) + '\n\n';
+    }
+    
+    // Custom tape request
+    if (customLength || customGenres.length > 0 || customInspiration) {
+      text += 'CUSTOM TAPE REQUEST:\n\n';
+      
+      if (customLength) {
+        text += `  Preferred Length: ${customLength}\n`;
+      }
+      
+      if (customGenres.length > 0) {
+        text += `  Genres: ${customGenres.join(', ')}\n`;
+      }
+      
+      if (customInspiration) {
+        text += `  Inspiration/Notes:\n`;
+        text += customInspiration.split('\n').map(line => `    ${line}`).join('\n') + '\n';
+      }
+      
+      text += '\n' + '-'.repeat(60) + '\n\n';
+    }
+    
+    // Preferences
+    text += 'TAPE PREFERENCES:\n\n';
+    text += `  Tape Type: ${formatPreference(tapeTypePref)}\n`;
+    text += `  Dolby NR: ${formatPreference(dolbyPref)}\n`;
+    text += '\n' + '-'.repeat(60) + '\n\n';
+    
+    // Additional notes
+    if (notes) {
+      text += 'ADDITIONAL NOTES:\n\n';
+      text += notes.split('\n').map(line => `  ${line}`).join('\n') + '\n\n';
+      text += '='.repeat(60) + '\n';
+    } else {
+      text += '='.repeat(60) + '\n';
+    }
+    
+    return text;
+  }
+  
+  function formatPreference(value) {
+    if (value === 'no-preference') {
+      return 'No preference';
+    }
+    return value.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  }
+  
+  function copyToClipboard() {
+    const outputText = document.getElementById('output-text');
+    if (!outputText) return;
+    
+    const text = outputText.textContent;
+    
+    // Modern clipboard API
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        showCopyFeedback();
+      }).catch(err => {
+        console.error('Failed to copy:', err);
+        fallbackCopy(text);
+      });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+  
+  function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    
+    try {
+      document.execCommand('copy');
+      showCopyFeedback();
+    } catch (err) {
+      console.error('Fallback copy failed:', err);
+      alert('Failed to copy. Please select and copy the text manually.');
+    }
+    
+    document.body.removeChild(textarea);
+  }
+  
+  function showCopyFeedback() {
+    const copyBtn = document.getElementById('copy-output');
+    if (!copyBtn) return;
+    
+    const originalText = copyBtn.textContent;
+    copyBtn.textContent = '✓ Copied!';
+    copyBtn.style.backgroundColor = '#2ecc71';
+    
+    setTimeout(() => {
+      copyBtn.textContent = originalText;
+      copyBtn.style.backgroundColor = '';
+    }, 2000);
+  }
+  
+  function editRequest() {
+    const outputSection = document.getElementById('output-section');
+    const formContainer = document.querySelector('.request-form-container');
+    
+    if (outputSection) {
+      outputSection.style.display = 'none';
+    }
+    
+    if (formContainer) {
+      formContainer.style.display = 'block';
+      formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+})();
