@@ -63,7 +63,7 @@ layout: default
           <div class="metadata-item">
             <span class="metadata-label">Status</span>
             {% if page.requestable %}
-            <span class="metadata-value status-available">Available for loan</span>
+            <span class="metadata-value status-available">Available to copy</span>
             {% else %}
             <span class="metadata-value status-unavailable">Not available</span>
             {% endif %}
@@ -87,17 +87,17 @@ layout: default
           <a href="{{ '/request.html' | relative_url }}" class="btn-primary">Go to Request Page</a>
         </div>
         {% endif %}
+        
+        <div class="tape-tracklist-section">
+          <h2>Tracklist</h2>
+          <ol class="tracklist">
+            {% for track in page.tracklist %}
+            <li>{{ track }}</li>
+            {% endfor %}
+          </ol>
+        </div>
       </div>
     </div>
-  </div>
-  
-  <div class="tape-tracklist-section">
-    <h2>Tracklist</h2>
-    <ol class="tracklist">
-      {% for track in page.tracklist %}
-      <li>{{ track }}</li>
-      {% endfor %}
-    </ol>
   </div>
 </article>
 

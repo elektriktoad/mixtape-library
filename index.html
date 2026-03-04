@@ -27,23 +27,25 @@ title: Mixtape Library
     {% for tape in site.tapes %}
     <div class="tape-card" data-tape-id="{{ tape.slug }}">
       <div class="tape-card-inner">
-        <div class="tape-image-wrapper">
-          {% if tape.front_image %}
-          <img src="{{ '/images/' | append: tape.front_image | relative_url }}" 
-               alt="{{ tape.title }}" 
-               class="tape-image">
-          {% else %}
-          <div class="tape-placeholder">
-            <span>No Image</span>
+        <a href="{{ tape.url | relative_url }}" class="tape-image-link">
+          <div class="tape-image-wrapper">
+            {% if tape.front_image %}
+            <img src="{{ '/images/' | append: tape.front_image | relative_url }}" 
+                 alt="{{ tape.title }}" 
+                 class="tape-image">
+            {% else %}
+            <div class="tape-placeholder">
+              <span>No Image</span>
+            </div>
+            {% endif %}
+            
+            <div class="tape-hover-overlay">
+              <h3>{{ tape.title }}</h3>
+              <p class="tape-author">{{ tape.author }}</p>
+              <p class="tape-description">{{ tape.description }}</p>
+            </div>
           </div>
-          {% endif %}
-          
-          <div class="tape-hover-overlay">
-            <h3>{{ tape.title }}</h3>
-            <p class="tape-author">{{ tape.author }}</p>
-            <p class="tape-description">{{ tape.description }}</p>
-          </div>
-        </div>
+        </a>
         
         <div class="tape-card-footer">
           <h3 class="tape-title">{{ tape.title }}</h3>

@@ -197,11 +197,13 @@
     
     // Custom tape request
     const customLength = document.getElementById('custom-length').value;
+    const customTapeType = document.getElementById('custom-tape-type').value;
+    const customDolby = document.getElementById('custom-dolby').value;
     const customGenres = Array.from(document.querySelectorAll('input[name="custom-genre"]:checked'))
       .map(cb => cb.value);
     const customInspiration = document.getElementById('custom-inspiration').value.trim();
     
-    // Tape preferences
+    // Tape preferences (for catalogs tapes)
     const tapeTypePref = document.querySelector('input[name="tape-type-pref"]:checked')?.value || 'no-preference';
     const dolbyPref = document.querySelector('input[name="dolby-pref"]:checked')?.value || 'no-preference';
     
@@ -243,11 +245,23 @@
     }
     
     // Custom tape request
-    if (customLength || customGenres.length > 0 || customInspiration) {
+    if (customLength || customGenres.length > 0 || customInspiration || customTapeType || customDolby) {
       text += 'CUSTOM TAPE REQUEST:\n\n';
       
       if (customLength) {
         text += `  Preferred Length: ${customLength}\n`;
+      }
+      
+      if (customTapeType) {
+        const tapeTypeSelect = document.getElementById('custom-tape-type');
+        const selectedOption = tapeTypeSelect.options[tapeTypeSelect.selectedIndex];
+        text += `  Tape Type: ${selectedOption.text}\n`;
+      }
+      
+      if (customDolby) {
+        const dolbySelect = document.getElementById('custom-dolby');
+        const selectedOption = dolbySelect.options[dolbySelect.selectedIndex];
+        text += `  Dolby NR: ${selectedOption.text}\n`;
       }
       
       if (customGenres.length > 0) {

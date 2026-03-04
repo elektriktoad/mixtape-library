@@ -43,7 +43,7 @@ title: Request Tapes
   <div class="creator-preferences">
     <h2>What {{ site.data.settings.owner.name }} Loves</h2>
     <p class="preferences-intro">To help you know what to make in exchange, here's what {{ site.data.settings.owner.name }} enjoys:</p>
-    <div class="preferences-list preferences-columns">
+    <div class="preferences-list">
       <div class="preference-item">
         <h4>Favorite Genres & Artists</h4>
         <ul>
@@ -123,14 +123,40 @@ title: Request Tapes
         <h3>Request a Custom Tape</h3>
         <p class="section-description">If you'd like a custom mixtape, fill out the details below.</p>
         
-        <div class="form-group">
-          <label for="custom-length">Preferred Length</label>
-          <select id="custom-length" name="custom-length">
-            <option value="">Select length (optional)</option>
-            {% for length in site.data.tape_options.tape_lengths %}
-            <option value="{{ length }}">{{ length }}</option>
-            {% endfor %}
-          </select>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="custom-length">Preferred Length</label>
+            <select id="custom-length" name="custom-length">
+              <option value="">Select length (optional)</option>
+              {% for length in site.data.tape_options.tape_lengths %}
+              <option value="{{ length }}">{{ length }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="custom-tape-type">Tape Type (optional)</label>
+            <select id="custom-tape-type" name="custom-tape-type">
+              <option value="">No preference</option>
+              {% for tape_type in site.data.tape_options.tape_types %}
+              <option value="{{ tape_type.value }}" {% unless tape_type.available %}disabled{% endunless %}>
+                {{ tape_type.name }} <em>({{ tape_type.cost }})</em>
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="custom-dolby">Dolby NR (optional)</label>
+            <select id="custom-dolby" name="custom-dolby">
+              <option value="">No preference</option>
+              {% for dolby in site.data.tape_options.dolby_options %}
+              <option value="{{ dolby.value }}" {% unless dolby.available %}disabled{% endunless %}>
+                {{ dolby.name }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
         </div>
         
         <div class="form-group">
@@ -151,49 +177,6 @@ title: Request Tapes
                     name="custom-inspiration" 
                     rows="4" 
                     placeholder="E.g., My favorite bands are The Cure and BTS, and I don't like X genre"></textarea>
-        </div>
-      </section>
-      
-      <!-- Tape Type Preferences -->
-      <section class="form-section">
-        <h3>Tape Preferences</h3>
-        
-        <div class="form-group">
-          <label>Preferred Tape Type</label>
-          <div class="radio-group">
-            {% for tape_type in site.data.tape_options.tape_types %}
-            <label class="radio-label {% unless tape_type.available %}disabled{% endunless %}">
-              <input type="radio" 
-                     name="tape-type-pref" 
-                     value="{{ tape_type.value }}"
-                     {% unless tape_type.available %}disabled{% endunless %}>
-              <span>{{ tape_type.name }} <em>({{ tape_type.cost }})</em></span>
-            </label>
-            {% endfor %}
-            <label class="radio-label">
-              <input type="radio" name="tape-type-pref" value="no-preference" checked>
-              <span>No preference</span>
-            </label>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label>Preferred Dolby Noise Reduction</label>
-          <div class="radio-group">
-            {% for dolby in site.data.tape_options.dolby_options %}
-            <label class="radio-label {% unless dolby.available %}disabled{% endunless %}">
-              <input type="radio" 
-                     name="dolby-pref" 
-                     value="{{ dolby.value }}"
-                     {% unless dolby.available %}disabled{% endunless %}>
-              <span>{{ dolby.name }}</span>
-            </label>
-            {% endfor %}
-            <label class="radio-label">
-              <input type="radio" name="dolby-pref" value="no-preference" checked>
-              <span>No preference</span>
-            </label>
-          </div>
         </div>
       </section>
       
