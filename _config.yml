@@ -3,8 +3,13 @@
 
 title: "Mixtape Library"
 description: "A catalog of cassette mixtapes available for borrowing"
-baseurl: "" # Leave empty for user's GitHub Pages URL
-url: "" # Will be set by GitHub Pages
+
+# IMPORTANT: Set baseurl to your repository name for GitHub Pages
+# If hosted at yourusername.github.io/my-mixtapes/, use: /my-mixtapes/
+# If hosted at yourusername.github.io/, use: (empty)
+# If hosted at custom domain, use: (empty)
+baseurl: "/mixtape-library-template"
+url: ""
 
 # Collections
 collections:
