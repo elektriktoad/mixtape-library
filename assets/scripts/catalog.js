@@ -182,13 +182,13 @@
   }
 
   function applyTagFilters() {
-    const selectedTags = getSelectedTags();
+    const selectedTags = getSelectedTags().map(tag => tag.toLowerCase().trim());
     const items = document.querySelectorAll('.tape-card, .tape-list-item');
 
     items.forEach(item => {
       const itemTags = (item.dataset.tags || '')
         .split('|')
-        .map(tag => tag.trim())
+        .map(tag => tag.toLowerCase().trim())
         .filter(Boolean);
 
       const isVisible = selectedTags.length === 0 || selectedTags.some(tag => itemTags.includes(tag));
