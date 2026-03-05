@@ -208,19 +208,42 @@ main {
 }
 
 /* ========================================
+   Header Controls Layout (Two Column)
+   ======================================== */
+.header-controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--spacing-2xl);
+  align-items: start;
+  margin-top: var(--spacing-2xl);
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  align-items: flex-start;
+}
+
+.header-right {
+  width: 100%;
+}
+
+/* ========================================
    View Controls
    ======================================== */
 .view-controls {
   display: flex;
-  justify-content: center;
-  gap: var(--spacing-md);
-  margin: var(--spacing-xl) 0;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  align-items: flex-start;
 }
 
 .tag-filter-controls {
-  max-width: 900px;
-  margin: 0 auto var(--spacing-xl);
-  text-align: left;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
 }
 
 .tag-filter-details {

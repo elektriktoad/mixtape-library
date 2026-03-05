@@ -20,39 +20,48 @@ title: Mixtape Library
 <div class="header-section">
   <h1>{{ site.data.settings.owner.name }}'s Mixtape Library</h1>
   <p class="bio">{{ site.data.settings.owner.bio }}</p>
-  {% if site.data.settings.owner.accepting_requests %}
-  <p class="request-status request-status-open">Currently accepting tape requests.</p>
-  {% else %}
-  <p class="request-status request-status-closed">Requests are currently paused.</p>
-  {% endif %}
   
-  <div class="view-controls">
-    <button id="catalog-view-btn" class="view-btn active" data-view="catalog">
-      <span>Grid View</span>
-    </button>
-    <button id="list-view-btn" class="view-btn" data-view="list">
-      <span>List View</span>
-    </button>
-  </div>
-
-  {% if all_tags != "" %}
-  <div class="tag-filter-controls">
-    <details class="tag-filter-details">
-      <summary>Filter by Tags <span id="selected-tag-count">(All)</span></summary>
-      <div class="tag-filter-options">
-        {% for tag in unique_tags %}
-          {% if tag != "" %}
-          <label class="tag-filter-option">
-            <input type="checkbox" class="tag-filter-checkbox" value="{{ tag }}">
-            <span>{{ tag }}</span>
-          </label>
-          {% endif %}
-        {% endfor %}
+  <div class="header-controls">
+    <!-- Left Column: Request Status and View Controls -->
+    <div class="header-left">
+      {% if site.data.settings.owner.accepting_requests %}
+      <p class="request-status request-status-open">Currently accepting tape requests.</p>
+      {% else %}
+      <p class="request-status request-status-closed">Requests are currently paused.</p>
+      {% endif %}
+      
+      <div class="view-controls">
+        <button id="catalog-view-btn" class="view-btn active" data-view="catalog">
+          <span>Grid View</span>
+        </button>
+        <button id="list-view-btn" class="view-btn" data-view="list">
+          <span>List View</span>
+        </button>
       </div>
-      <button type="button" id="clear-tag-filters" class="tag-clear-btn">Show All</button>
-    </details>
+    </div>
+
+    <!-- Right Column: Tag Filters -->
+    {% if all_tags != "" %}
+    <div class="header-right">
+      <div class="tag-filter-controls">
+        <details class="tag-filter-details">
+          <summary>Filter by Tags <span id="selected-tag-count">(All)</span></summary>
+          <div class="tag-filter-options">
+            {% for tag in unique_tags %}
+              {% if tag != "" %}
+              <label class="tag-filter-option">
+                <input type="checkbox" class="tag-filter-checkbox" value="{{ tag }}">
+                <span>{{ tag }}</span>
+              </label>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <button type="button" id="clear-tag-filters" class="tag-clear-btn">Show All</button>
+        </details>
+      </div>
+    </div>
+    {% endif %}
   </div>
-  {% endif %}
   
   {% if site.data.settings.site.show_tape_count %}
   <p class="tape-count">{{ site.tapes.size }} tapes in collection</p>
