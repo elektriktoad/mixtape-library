@@ -2,18 +2,18 @@
 # Customize these values to personalize your mixtape library
 
 owner:
-  name: "Your Name"
-  email: "your.email@example.com"
-  bio: "Music enthusiast sharing mixtapes since 199X. Specializing in indie rock, post-punk, and ambient soundscapes."
+  name: "James"
+  email: "jamesbartolotti@gmail.com"
+  bio: "I've been collecting tapes since 2023, and I'm always up to swap tapes I've made or found at garage sales. Specializing in Synth-pop, New Wave, and Mid-2000's Indie Rock."
   accepting_requests: true
   
   # Genre preferences for "What I Love" section
   genre_preferences:
-    - "New Wave: The Cure, New Order, Depeche Mode"
-    - "Indie Rock: Pavement, Guided by Voices, Built to Spill"
-    - "Post-Punk: Joy Division, Gang of Four, Wire"
-    - "Shoegaze: My Bloody Valentine, Slowdive, Ride"
-    - "Ambient: Brian Eno, Stars of the Lid, Tim Hecker"
+    - "Synth-Pop: Thomas Dolby, Human League, Depeche Mode"
+    - "New Wave: The Cure, New Order, The Psychedelic Furs"
+    - "City Pop: Anri, Mariya Takeuchi, Tatsuro Yamashita"
+    - "Alternative: The Strokes, Cake, Electric Six"
+    - "Indie: Rock Kills Kid, Sweeping Promises, Dragon Inn 3"
   
   # Tape types you prefer to receive (use values from tape_options.yml)
   preferred_tape_types:
@@ -28,7 +28,7 @@ owner:
 policy:
   description: "I'm happy to copy and exchange tapes with fellow enthusiasts! Please read the guidelines below."
   guidelines:
-    - "I will ship to X, Y, and Z countries"
+    - "I'm currently only shipping to the United States"
     - "Allow 2-4 weeks for processing and shipping"
     - "I prefer exchanging a comparable number of tapes instead of purchases. But if you don't have tapes to exchange, I accept a small fee to cover the cost of blanks and shipping (see charges below)"
   
