@@ -61,6 +61,7 @@ Edit `_data/tape_options.yml`:
    author: "self"
    length: "90 minutes"
    genre: "Alternative Rock"
+   tags: "alternative rock, 90s, road trip"
    description: "A collection of my favorite indie tracks from the 90s"
    requestable: true
    tape_type: "Type I"
@@ -73,6 +74,8 @@ Edit `_data/tape_options.yml`:
      - "Add more tracks here..."
    ---
    ```
+
+   The `tags` field should be comma-separated. These tags become filter options on the catalog page.
 
 3. **Scan your tape cover** and save as `images/my-first-tape-front.jpg`
 

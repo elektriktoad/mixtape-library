@@ -6,16 +6,20 @@
   // Constants
   const STORAGE_KEY = 'mixtape_selected_tapes';
   const VIEW_STORAGE_KEY = 'mixtape_view_preference';
+  const TAG_FILTER_STORAGE_KEY = 'mixtape_tag_filters';
   
   // Initialize on page load
   document.addEventListener('DOMContentLoaded', init);
   
   function init() {
     setupViewToggle();
+    setupTagFilters();
     setupCheckboxes();
     loadSelectedTapes();
     updateRequestCount();
     restoreViewPreference();
+    restoreTagFilters();
+    applyTagFilters();
   }
   
   // ========================================
@@ -57,6 +61,9 @@
     
     // Sync checkbox states between views
     syncCheckboxStates();
+
+    // Keep filters in sync when changing views
+    applyTagFilters();
   }
   
   function restoreViewPreference() {
@@ -112,6 +119,108 @@
   
   function loadSelectedTapes() {
     syncCheckboxStates();
+  }
+
+  // ========================================
+  // Tag Filters
+  // ========================================
+
+  function setupTagFilters() {
+    const filterCheckboxes = document.querySelectorAll('.tag-filter-checkbox');
+    const clearButton = document.getElementById('clear-tag-filters');
+
+    if (!filterCheckboxes.length) return;
+
+    filterCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        const selectedTags = getSelectedTags();
+        saveTagFilters(selectedTags);
+        applyTagFilters();
+      });
+    });
+
+    if (clearButton) {
+      clearButton.addEventListener('click', () => {
+        filterCheckboxes.forEach(checkbox => {
+          checkbox.checked = false;
+        });
+        saveTagFilters([]);
+        applyTagFilters();
+      });
+    }
+  }
+
+  function getSelectedTags() {
+    const filterCheckboxes = document.querySelectorAll('.tag-filter-checkbox:checked');
+    return Array.from(filterCheckboxes).map(checkbox => checkbox.value);
+  }
+
+  function restoreTagFilters() {
+    const filterCheckboxes = document.querySelectorAll('.tag-filter-checkbox');
+    if (!filterCheckboxes.length) return;
+
+    try {
+      const saved = localStorage.getItem(TAG_FILTER_STORAGE_KEY);
+      const selectedTags = saved ? JSON.parse(saved) : [];
+
+      if (!Array.isArray(selectedTags)) return;
+
+      filterCheckboxes.forEach(checkbox => {
+        checkbox.checked = selectedTags.includes(checkbox.value);
+      });
+    } catch (e) {
+      console.error('Error restoring tag filters:', e);
+    }
+  }
+
+  function saveTagFilters(tags) {
+    try {
+      localStorage.setItem(TAG_FILTER_STORAGE_KEY, JSON.stringify(tags));
+    } catch (e) {
+      console.error('Error saving tag filters:', e);
+    }
+  }
+
+  function applyTagFilters() {
+    const selectedTags = getSelectedTags();
+    const items = document.querySelectorAll('.tape-card, .tape-list-item');
+
+    items.forEach(item => {
+      const itemTags = (item.dataset.tags || '')
+        .split('|')
+        .map(tag => tag.trim())
+        .filter(Boolean);
+
+      const isVisible = selectedTags.length === 0 || selectedTags.some(tag => itemTags.includes(tag));
+      item.style.display = isVisible ? '' : 'none';
+    });
+
+    toggleNoResults('.catalog-view.active .tape-card', '.catalog-no-results');
+    toggleNoResults('.list-view.active .tape-list-item', '.list-no-results');
+    updateTagCount(selectedTags.length);
+  }
+
+  function toggleNoResults(visibleItemSelector, messageSelector) {
+    const message = document.querySelector(messageSelector);
+    if (!message) return;
+
+    const allItems = document.querySelectorAll(visibleItemSelector);
+    const visibleItems = Array.from(allItems).filter(item => item.style.display !== 'none');
+
+    if (visibleItems.length === 0) {
+      message.classList.remove('is-hidden');
+    } else {
+      message.classList.add('is-hidden');
+    }
+  }
+
+  function updateTagCount(selectedCount) {
+    const countElement = document.getElementById('selected-tag-count');
+    if (!countElement) return;
+
+    countElement.textContent = selectedCount > 0
+      ? `(${selectedCount} selected)`
+      : '(All)';
   }
   
   // ========================================

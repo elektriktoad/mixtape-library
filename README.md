@@ -5,6 +5,7 @@ A clean, forkable GitHub Pages template for cataloging and sharing your cassette
 ## Features
 
 - **Dual View Modes**: Grid view with hover previews and detailed list view
+- **Tag Filtering**: Filter catalog/list by one or more tape tags
 - **Request Generator**: Client-side form that creates formatted email text
 - **Easy Content Management**: Add tapes via simple markdown files
 - **GitHub Pages Ready**: Deploy for free with zero configuration
@@ -58,6 +59,7 @@ title: "Midnight Dreaming"
 author: "self"
 length: "90 minutes"
 genre: "Shoegaze / Dream Pop"
+tags: "shoegaze, dream pop"
 description: "A hazy journey through reverb-soaked guitars..."
 requestable: true
 tape_type: "Type II"
@@ -69,6 +71,8 @@ tracklist:
   - "My Bloody Valentine - When You Sleep"
 ---
 ```
+
+Tags should be a comma-separated list in each tape file. The catalog automatically builds filter options from these tags.
 
 ### 4. Add Images
 

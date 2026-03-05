@@ -2,9 +2,50 @@
 layout: default
 ---
 
+{% assign current_index = 0 %}
+{% assign sorted_tapes = site.tapes | sort: "title" %}
+{% for tape in sorted_tapes %}
+  {% if tape.url == page.url %}
+    {% assign current_index = forloop.index0 %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% assign last_index = sorted_tapes.size | minus: 1 %}
+{% assign previous_tape = nil %}
+{% assign next_tape = nil %}
+
+{% if current_index > 0 %}
+  {% assign previous_index = current_index | minus: 1 %}
+  {% for tape in sorted_tapes offset: previous_index limit: 1 %}
+    {% assign previous_tape = tape %}
+  {% endfor %}
+{% endif %}
+
+{% if current_index < last_index %}
+  {% assign next_index = current_index | plus: 1 %}
+  {% for tape in sorted_tapes offset: next_index limit: 1 %}
+    {% assign next_tape = tape %}
+  {% endfor %}
+{% endif %}
+
 <article class="tape-detail">
   <div class="tape-detail-header">
-    <a href="{{ '/' | relative_url }}" class="back-link">&larr; Back to Catalog</a>
+    <div class="tape-detail-nav">
+      {% if previous_tape %}
+      <a href="{{ previous_tape.url | relative_url }}" class="tape-nav-link">&larr; Previous Tape</a>
+      {% else %}
+      <span class="tape-nav-placeholder"></span>
+      {% endif %}
+
+      <a href="{{ '/' | relative_url }}" class="back-link">&larr; Back to Catalog</a>
+
+      {% if next_tape %}
+      <a href="{{ next_tape.url | relative_url }}" class="tape-nav-link">Next Tape &rarr;</a>
+      {% else %}
+      <span class="tape-nav-placeholder"></span>
+      {% endif %}
+    </div>
     
     <div class="tape-detail-content">
       <div class="tape-detail-images">
