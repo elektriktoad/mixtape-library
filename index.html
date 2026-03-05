@@ -7,7 +7,7 @@ title: Mixtape Library
   <h1>{{ site.data.settings.owner.name }}'s Mixtape Library</h1>
   <p class="bio">{{ site.data.settings.owner.bio }}</p>
   {% if site.data.settings.owner.accepting_requests %}
-  <p class="request-status request-status-open">Now accepting tape requests.</p>
+  <p class="request-status request-status-open">Currently accepting tape requests.</p>
   {% else %}
   <p class="request-status request-status-closed">Requests are currently paused.</p>
   {% endif %}
@@ -116,7 +116,7 @@ title: Mixtape Library
         {% elsif tape.requestable %}
         <span class="not-requestable">Requests currently closed</span>
         {% else %}
-        <span class="not-requestable">Not available for loan</span>
+        <span class="not-requestable">Not available to copy</span>
         {% endif %}
       </div>
     </div>

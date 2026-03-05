@@ -38,6 +38,9 @@ title: Request Tapes
         {% if site.data.settings.policy.charges.shipping %}
         <li><strong>Shipping:</strong> {{ site.data.settings.policy.charges.shipping }}</li>
         {% endif %}
+        {% if site.data.settings.policy.charges.payment %}
+        <li><strong>Payment Processing:</strong> {{ site.data.settings.policy.charges.payment }}</li>
+        {% endif %}
       </ul>
     </div>
   </div>

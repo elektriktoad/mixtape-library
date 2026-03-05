@@ -44,7 +44,8 @@
     if (!container) return;
     
     if (selectedTapes.length === 0) {
-      container.innerHTML = '<p class="empty-message">No tapes selected. <a href="{{ "/" | relative_url }}">Browse the catalog</a> to add tapes to your request.</p>';
+      const baseUrl = document.querySelector('meta[name="baseurl"]')?.content || '';
+      container.innerHTML = `<p class="empty-message">No tapes selected. <a href="${baseUrl}/">Browse the catalog</a> to add tapes to your request.</p>`;
       return;
     }
     

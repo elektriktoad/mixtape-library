@@ -16,7 +16,7 @@ layout: default
         </div>
         {% endif %}
         
-        {% if page.back_image %}
+        {% if page.back_image and page.back_image != "" %}
         <div class="tape-image-large">
           <img src="{{ '/images/' | append: page.back_image | relative_url }}" 
                alt="{{ page.title }} - Back">
