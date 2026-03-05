@@ -11,7 +11,7 @@ tape_types:
   - name: "Type II (Chrome)"
     value: "type_ii"
     available: true
-    cost: "$2"
+    cost: "$2 (or free for exchanges)"
   
   - name: "Type IV (Metal)"
     value: "type_iv"

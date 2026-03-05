@@ -75,7 +75,7 @@ layout: default
           <p>{{ page.description }}</p>
         </div>
         
-        {% if page.requestable %}
+        {% if site.data.settings.owner.accepting_requests and page.requestable %}
         <div class="tape-request-action">
           <label class="request-checkbox-label large">
             <input type="checkbox" 
@@ -86,6 +86,8 @@ layout: default
           </label>
           <a href="{{ '/request.html' | relative_url }}" class="btn-primary">Go to Request Page</a>
         </div>
+        {% elsif page.requestable %}
+        <p class="not-requestable">Requests are currently closed.</p>
         {% endif %}
         
         <div class="tape-tracklist-section">

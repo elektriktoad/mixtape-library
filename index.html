@@ -6,6 +6,11 @@ title: Mixtape Library
 <div class="header-section">
   <h1>{{ site.data.settings.owner.name }}'s Mixtape Library</h1>
   <p class="bio">{{ site.data.settings.owner.bio }}</p>
+  {% if site.data.settings.owner.accepting_requests %}
+  <p class="request-status request-status-open">Now accepting tape requests.</p>
+  {% else %}
+  <p class="request-status request-status-closed">Requests are currently paused.</p>
+  {% endif %}
   
   <div class="view-controls">
     <button id="catalog-view-btn" class="view-btn active" data-view="catalog">
@@ -56,7 +61,7 @@ title: Mixtape Library
           
           <div class="tape-actions">
             <a href="{{ tape.url | relative_url }}" class="btn-details">View Details</a>
-            {% if tape.requestable %}
+            {% if site.data.settings.owner.accepting_requests and tape.requestable %}
             <label class="request-checkbox-label">
               <input type="checkbox" 
                      class="request-checkbox" 
@@ -64,6 +69,8 @@ title: Mixtape Library
                      data-tape-slug="{{ tape.slug }}">
               <span>Request</span>
             </label>
+            {% elsif tape.requestable %}
+            <span class="not-requestable">Requests currently closed</span>
             {% else %}
             <span class="not-requestable">Not Available</span>
             {% endif %}
@@ -98,7 +105,7 @@ title: Mixtape Library
       <p class="tape-description">{{ tape.description }}</p>
       
       <div class="tape-list-actions">
-        {% if tape.requestable %}
+        {% if site.data.settings.owner.accepting_requests and tape.requestable %}
         <label class="request-checkbox-label">
           <input type="checkbox" 
                  class="request-checkbox" 
@@ -106,6 +113,8 @@ title: Mixtape Library
                  data-tape-slug="{{ tape.slug }}">
           <span>Request this tape</span>
         </label>
+        {% elsif tape.requestable %}
+        <span class="not-requestable">Requests currently closed</span>
         {% else %}
         <span class="not-requestable">Not available for loan</span>
         {% endif %}
@@ -125,9 +134,13 @@ title: Mixtape Library
 </div>
 
 <div class="request-section">
+  {% if site.data.settings.owner.accepting_requests %}
   <a href="{{ '/request.html' | relative_url }}" class="btn-primary btn-large" id="go-to-request">
     <span id="request-count">0</span> tape(s) selected - Make a Request
   </a>
+  {% else %}
+  <p class="request-status request-status-closed">Requests are currently paused. Please check back later.</p>
+  {% endif %}
 </div>
 
 <script src="{{ '/assets/scripts/catalog.js' | relative_url }}"></script>

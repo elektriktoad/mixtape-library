@@ -48,48 +48,11 @@
       return;
     }
     
-    // Get tape options from page data attributes (Jekyll injects them)
-    const requestPage = document.querySelector('.request-page');
-    let tapeTypes = [];
-    let dolbyOptions = [];
-    
-    try {
-      const tapeTypesData = requestPage?.getAttribute('data-tape-types');
-      const dolbyOptionsData = requestPage?.getAttribute('data-dolby-options');
-      
-      if (tapeTypesData) {
-        tapeTypes = JSON.parse(tapeTypesData).filter(t => t.available);
-      }
-      if (dolbyOptionsData) {
-        dolbyOptions = JSON.parse(dolbyOptionsData).filter(d => d.available);
-      }
-    } catch (e) {
-      console.warn('Could not parse tape options from page', e);
-    }
-    
     container.innerHTML = selectedTapes.map(tape => `
       <div class="selected-tape-item" data-slug="${tape.slug}">
         <div class="tape-title-row">
           <span><strong>${tape.title}</strong></span>
           <button type="button" class="remove-tape" data-slug="${tape.slug}" title="Remove">×</button>
-        </div>
-        
-        <div class="tape-options-row">
-          <div class="option-group">
-            <label for="tape-type-${tape.slug}">Tape Type (optional)</label>
-            <select id="tape-type-${tape.slug}" class="tape-type-select" data-slug="${tape.slug}">
-              <option value="">No preference</option>
-              ${tapeTypes.map(type => `<option value="${type.value}">${type.name}</option>`).join('')}
-            </select>
-          </div>
-          
-          <div class="option-group">
-            <label for="dolby-${tape.slug}">Dolby NR (optional)</label>
-            <select id="dolby-${tape.slug}" class="dolby-select" data-slug="${tape.slug}">
-              <option value="">No preference</option>
-              ${dolbyOptions.map(dolby => `<option value="${dolby.value}">${dolby.name}</option>`).join('')}
-            </select>
-          </div>
         </div>
       </div>
     `).join('');
@@ -189,23 +152,18 @@
     const email = document.getElementById('requester-email').value.trim();
     const address = document.getElementById('return-address').value.trim();
     const notes = document.getElementById('additional-notes').value.trim();
-    
-    // What requestor can make
-    const yourGenres = Array.from(document.querySelectorAll('input[name="your-genre"]:checked'))
-      .map(cb => cb.value);
-    const yourNotes = document.getElementById('your-notes').value.trim();
+    const requesterSkills = document.getElementById('requester-skills')?.value.trim() || '';
+
+    const requestTapeTypeSelect = document.getElementById('request-tape-type');
+    const requestDolbySelect = document.getElementById('request-dolby');
+    const requestTapeType = requestTapeTypeSelect?.value || '';
+    const requestDolby = requestDolbySelect?.value || '';
     
     // Custom tape request
     const customLength = document.getElementById('custom-length').value;
-    const customTapeType = document.getElementById('custom-tape-type').value;
-    const customDolby = document.getElementById('custom-dolby').value;
     const customGenres = Array.from(document.querySelectorAll('input[name="custom-genre"]:checked'))
       .map(cb => cb.value);
     const customInspiration = document.getElementById('custom-inspiration').value.trim();
-    
-    // Tape preferences (for catalogs tapes)
-    const tapeTypePref = document.querySelector('input[name="tape-type-pref"]:checked')?.value || 'no-preference';
-    const dolbyPref = document.querySelector('input[name="dolby-pref"]:checked')?.value || 'no-preference';
     
     // Build the email text
     let text = '='.repeat(60) + '\n';
@@ -226,42 +184,16 @@
       text += 'REQUESTED TAPES FROM CATALOG:\n\n';
       selectedTapes.forEach((tape, index) => {
         text += `  ${index + 1}. ${tape.title}\n`;
-        
-        // Get per-tape selections
-        const tapeTypeSelect = document.getElementById(`tape-type-${tape.slug}`);
-        const dolbySelect = document.getElementById(`dolby-${tape.slug}`);
-        
-        if (tapeTypeSelect && tapeTypeSelect.value) {
-          const selectedOption = tapeTypeSelect.options[tapeTypeSelect.selectedIndex];
-          text += `     Tape Type: ${selectedOption.text}\n`;
-        }
-        
-        if (dolbySelect && dolbySelect.value) {
-          const selectedOption = dolbySelect.options[dolbySelect.selectedIndex];
-          text += `     Dolby NR: ${selectedOption.text}\n`;
-        }
       });
       text += '\n' + '-'.repeat(60) + '\n\n';
     }
     
     // Custom tape request
-    if (customLength || customGenres.length > 0 || customInspiration || customTapeType || customDolby) {
+    if (customLength || customGenres.length > 0 || customInspiration) {
       text += 'CUSTOM TAPE REQUEST:\n\n';
       
       if (customLength) {
         text += `  Preferred Length: ${customLength}\n`;
-      }
-      
-      if (customTapeType) {
-        const tapeTypeSelect = document.getElementById('custom-tape-type');
-        const selectedOption = tapeTypeSelect.options[tapeTypeSelect.selectedIndex];
-        text += `  Tape Type: ${selectedOption.text}\n`;
-      }
-      
-      if (customDolby) {
-        const dolbySelect = document.getElementById('custom-dolby');
-        const selectedOption = dolbySelect.options[dolbySelect.selectedIndex];
-        text += `  Dolby NR: ${selectedOption.text}\n`;
       }
       
       if (customGenres.length > 0) {
@@ -276,26 +208,16 @@
       text += '\n' + '-'.repeat(60) + '\n\n';
     }
     
-    // Preferences
-    text += 'TAPE PREFERENCES:\n\n';
-    text += `  Tape Type: ${formatPreference(tapeTypePref)}\n`;
-    text += `  Dolby NR: ${formatPreference(dolbyPref)}\n`;
+    // Global format preferences
+    text += 'FORMAT PREFERENCES (APPLIES TO ALL REQUESTS):\n\n';
+    text += `  Tape Type: ${requestTapeType ? requestTapeTypeSelect.options[requestTapeTypeSelect.selectedIndex].text : 'No preference'}\n`;
+    text += `  Dolby NR: ${requestDolby ? requestDolbySelect.options[requestDolbySelect.selectedIndex].text : 'No preference'}\n`;
     text += '\n' + '-'.repeat(60) + '\n\n';
-    
-    // What you can make
-    if (yourGenres.length > 0 || yourNotes) {
-      text += 'WHAT YOU CAN MAKE (for exchange):\n\n';
-      
-      if (yourGenres.length > 0) {
-        text += `  Genres: ${yourGenres.join(', ')}\n`;
-      }
-      
-      if (yourNotes) {
-        text += `  Notes/Special Skills:\n`;
-        text += yourNotes.split('\n').map(line => `    ${line}`).join('\n') + '\n';
-      }
-      
-      text += '\n' + '-'.repeat(60) + '\n\n';
+
+    if (requesterSkills) {
+      text += 'YOUR GENRES / SPECIALIZATIONS:\n\n';
+      text += requesterSkills.split('\n').map(line => `  ${line}`).join('\n') + '\n\n';
+      text += '-'.repeat(60) + '\n\n';
     }
     
     // Additional notes
@@ -308,13 +230,6 @@
     }
     
     return text;
-  }
-  
-  function formatPreference(value) {
-    if (value === 'no-preference') {
-      return 'No preference';
-    }
-    return value.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
   }
   
   function copyToClipboard() {

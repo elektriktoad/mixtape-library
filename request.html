@@ -3,10 +3,13 @@ layout: default
 title: Request Tapes
 ---
 
-<div class="request-page" 
-     data-tape-types='{{ site.data.tape_options.tape_types | jsonify }}'
-     data-dolby-options='{{ site.data.tape_options.dolby_options | jsonify }}'>
+<div class="request-page">
   <h1>Request Tapes</h1>
+  {% if site.data.settings.owner.accepting_requests %}
+  <p class="request-status request-status-open">Now accepting requests.</p>
+  {% else %}
+  <p class="request-status request-status-closed">Requests are currently paused.</p>
+  {% endif %}
   
   <div class="request-intro">
     <p>{{ site.data.settings.policy.description }}</p>
@@ -41,8 +44,8 @@ title: Request Tapes
   
   <!-- Creator's Mixtape Preferences -->
   <div class="creator-preferences">
-    <h2>What {{ site.data.settings.owner.name }} Loves</h2>
-    <p class="preferences-intro">To help you know what to make in exchange, here's what {{ site.data.settings.owner.name }} enjoys:</p>
+    <h2>My Music Preferences</h2>
+    <p class="preferences-intro">To help you know what to make in an exchange, here's what I enjoy:</p>
     <div class="preferences-list">
       <div class="preference-item">
         <h4>Favorite Genres & Artists</h4>
@@ -79,42 +82,46 @@ title: Request Tapes
     </div>
   </div>
 
+  {% if site.data.settings.owner.accepting_requests %}
   <div class="request-form-container">
     <h2>Build Your Request</h2>
     
     <form id="request-form" class="request-form">
+      <section class="form-section">
+        <h3>Format Preferences (Applies to All Requests)</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="request-tape-type">Tape Type (optional)</label>
+            <select id="request-tape-type" name="request-tape-type">
+              <option value="">No preference</option>
+              {% for tape_type in site.data.tape_options.tape_types %}
+              {% if tape_type.available %}
+              <option value="{{ tape_type.value }}">{{ tape_type.name }}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="request-dolby">Dolby NR (optional)</label>
+            <select id="request-dolby" name="request-dolby">
+              <option value="">No preference</option>
+              {% for dolby in site.data.tape_options.dolby_options %}
+              {% if dolby.available %}
+              <option value="{{ dolby.value }}">{{ dolby.name }}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </section>
+
       <!-- Selected Tapes Section -->
       <section class="form-section">
         <h3>Selected Tapes from Catalog</h3>
-        <p class="section-description">Specify your preferred format for each tape.</p>
+        <p class="section-description">These tapes will use the format preferences above.</p>
         <div id="selected-tapes-list" class="selected-tapes-list">
           <p class="empty-message">No tapes selected. <a href="{{ '/' | relative_url }}">Browse the catalog</a> to add tapes to your request.</p>
-        </div>
-      </section>
-      
-      <!-- What You Can Make -->
-      <section class="form-section">
-        <h3>What You Can Make</h3>
-        <p class="section-description">Let {{ site.data.settings.owner.name }} know what genres or styles you enjoy making, so they can request tapes in exchange that match your skills!</p>
-        
-        <div class="form-group">
-          <label for="your-genres">Genres You Can Make</label>
-          <div class="checkbox-group checkbox-columns">
-            {% for genre in site.data.tape_options.genres %}
-            <label class="checkbox-label">
-              <input type="checkbox" name="your-genre" value="{{ genre }}">
-              <span>{{ genre }}</span>
-            </label>
-            {% endfor %}
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="your-notes">Any Other Notes About Your Skills</label>
-          <textarea id="your-notes" 
-                    name="your-notes" 
-                    rows="3" 
-                    placeholder="E.g., 'I have access to Type II blanks' or 'I specialize in 80s music'"></textarea>
         </div>
       </section>
       
@@ -123,40 +130,14 @@ title: Request Tapes
         <h3>Request a Custom Tape</h3>
         <p class="section-description">If you'd like a custom mixtape, fill out the details below.</p>
         
-        <div class="form-row">
-          <div class="form-group">
-            <label for="custom-length">Preferred Length</label>
-            <select id="custom-length" name="custom-length">
-              <option value="">Select length (optional)</option>
-              {% for length in site.data.tape_options.tape_lengths %}
-              <option value="{{ length }}">{{ length }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="custom-tape-type">Tape Type (optional)</label>
-            <select id="custom-tape-type" name="custom-tape-type">
-              <option value="">No preference</option>
-              {% for tape_type in site.data.tape_options.tape_types %}
-              <option value="{{ tape_type.value }}" {% unless tape_type.available %}disabled{% endunless %}>
-                {{ tape_type.name }} <em>({{ tape_type.cost }})</em>
-              </option>
-              {% endfor %}
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="custom-dolby">Dolby NR (optional)</label>
-            <select id="custom-dolby" name="custom-dolby">
-              <option value="">No preference</option>
-              {% for dolby in site.data.tape_options.dolby_options %}
-              <option value="{{ dolby.value }}" {% unless dolby.available %}disabled{% endunless %}>
-                {{ dolby.name }}
-              </option>
-              {% endfor %}
-            </select>
-          </div>
+        <div class="form-group">
+          <label for="custom-length">Preferred Length</label>
+          <select id="custom-length" name="custom-length">
+            <option value="">Select length (optional)</option>
+            {% for length in site.data.tape_options.tape_lengths %}
+            <option value="{{ length }}">{{ length }}</option>
+            {% endfor %}
+          </select>
         </div>
         
         <div class="form-group">
@@ -200,6 +181,14 @@ title: Request Tapes
                  name="requester-email" 
                  required 
                  placeholder="your.email@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="requester-skills">Genres You Can Make / Specializations</label>
+          <textarea id="requester-skills"
+                    name="requester-skills"
+                    rows="3"
+                    placeholder="Example: New wave, shoegaze, synth-pop. I have access to Type II blanks."></textarea>
         </div>
         
         <div class="form-group">
@@ -249,6 +238,11 @@ title: Request Tapes
       </a>
     </div>
   </div>
+  {% else %}
+  <div class="request-form-container">
+    <p class="empty-message">Requests are currently paused. Please check back later.</p>
+  </div>
+  {% endif %}
 </div>
 
 <script src="{{ '/assets/scripts/request.js' | relative_url }}"></script>
