@@ -11,7 +11,7 @@ description: "An extended exploration of texture and space. Minimal beats, field
 requestable: true
 tape_type: "Type II"
 dolby: "Dolby B"
-front_image: "sonic-experiments-front.jpg"
+front_image: "sample_images/sonic-experiments-front.jpg"
 back_image: ""
 tracklist:
   - "Brian Eno - An Ending (Ascent)"

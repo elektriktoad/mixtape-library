@@ -11,8 +11,8 @@ description: "A hazy journey through reverb-soaked guitars and ethereal vocals. 
 requestable: true
 tape_type: "Type II"
 dolby: "Dolby B"
-front_image: "midnight-dreaming-front.jpg"
-back_image: "midnight-dreaming-back.jpg"
+front_image: "sample_images/midnight-dreaming-front.jpg"
+back_image: "sample_images/midnight-dreaming-back.jpg"
 tracklist:
   - title: "Side A"
     tracks:

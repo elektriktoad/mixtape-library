@@ -81,9 +81,15 @@ title: Mixtape Library
         <a href="{{ tape.url | relative_url }}" class="tape-image-link">
           <div class="tape-image-wrapper">
             {% if tape.front_image %}
-            <img src="{{ '/images/' | append: tape.front_image | relative_url }}" 
-                 alt="{{ tape.title }}" 
-                 class="tape-image">
+            {% if tape.collection == 'sample_tapes' %}
+              <img src="{{ tape.front_image | relative_url }}" 
+                   alt="{{ tape.title }}" 
+                   class="tape-image">
+            {% else %}
+              <img src="{{ '/images/' | append: tape.front_image | relative_url }}" 
+                   alt="{{ tape.title }}" 
+                   class="tape-image">
+            {% endif %}
             {% else %}
             <div class="tape-placeholder">
               <span>No Image</span>
@@ -146,8 +152,13 @@ title: Mixtape Library
   <div class="tape-list-item" data-tape-id="{{ tape.slug }}" data-tags="{% if tape.tags %}{% for tag in tape.tags %}{% assign clean_tag = tag | strip | downcase %}{% if clean_tag != '' %}{{ clean_tag }}|{% endif %}{% endfor %}{% endif %}">
     <div class="tape-list-image">
       {% if tape.front_image %}
-      <img src="{{ '/images/' | append: tape.front_image | relative_url }}" 
-           alt="{{ tape.title }}">
+      {% if tape.collection == 'sample_tapes' %}
+        <img src="{{ tape.front_image | relative_url }}" 
+             alt="{{ tape.title }}">
+      {% else %}
+        <img src="{{ '/images/' | append: tape.front_image | relative_url }}" 
+             alt="{{ tape.title }}">
+      {% endif %}
       {% else %}
       <div class="tape-placeholder-list">
         <span>No Image</span>

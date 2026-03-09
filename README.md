@@ -87,7 +87,7 @@ Use `date_recorded` for date text (avoid Jekyll's reserved `date` key). `trackli
 
 ### 4. Add Images
 
-Save cover photos to `/images/` matching your tape filenames. Recommended: 600x900px (2:3 vertical aspect ratio), JPEG format. Up to two images per tape are supported. Leave the back_image field blank in the tapename.md file to omit.
+Save cover photos to `/images/` matching your tape filenames. Recommended: 600x900px (2:3 vertical aspect ratio), JPEG format. Up to two images per tape are supported. Leave the back_image field blank in the tape markdown file to omit.
 
 ## Key Files
 
@@ -95,7 +95,8 @@ Save cover photos to `/images/` matching your tape filenames. Recommended: 600x9
 - **`_data/tape_options.yml`** - Available tape types, Dolby options, genres
 - **`_tapes/`** - Add your personal tape markdown files here (takes precedence over `sample_tapes/`)
 - **`sample_tapes/`** - Example tapes; only used if `_tapes/` is empty
-- **`images/`** - Add your tape cover photos here
+- **`images/`** - Add your personal tape cover photos here
+- **`sample_images/`** - Example images; used only by sample tapes
 
 ## Local Development (Optional)
 

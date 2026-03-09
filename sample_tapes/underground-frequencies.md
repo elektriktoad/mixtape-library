@@ -11,7 +11,7 @@ description: "Angular guitars, driving basslines, and detached vocals from the p
 requestable: true
 tape_type: "Type I"
 dolby: "none"
-front_image: "underground-frequencies-front.jpg"
+front_image: "sample_images/underground-frequencies-front.jpg"
 back_image: ""
 tracklist:
   - "Joy Division - Transmission"

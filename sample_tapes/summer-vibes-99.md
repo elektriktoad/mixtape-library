@@ -13,8 +13,8 @@ description: "Found at a yard sale! A time capsule of late 90s pop hits. Someone
 requestable: false
 tape_type: "Type I"
 dolby: "none"
-front_image: "summer-vibes-99-front.jpg"
-back_image: "summer-vibes-99-back.jpg"
+front_image: "sample_images/summer-vibes-99-front.jpg"
+back_image: "sample_images/summer-vibes-99-back.jpg"
 tracklist:
   - "TLC - No Scrubs"
   - "Backstreet Boys - I Want It That Way"
