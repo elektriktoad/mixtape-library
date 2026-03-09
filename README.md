@@ -58,7 +58,7 @@ Create markdown files in `_tapes/`, one for each tape:
 ---
 title: "Midnight Dreaming"
 author: "self"
-date: "2023-04-03"
+date_recorded: "2023-04-03"
 length: "90 minutes"
 genre: "Shoegaze / Dream Pop"
 tags:
@@ -82,7 +82,7 @@ tracklist:
 ---
 ```
 
-`tracklist` supports either a simple flat list, or grouped sections (`title` + `tracks`) for A/B sides.
+Use `date_recorded` for date text (avoid Jekyll's reserved `date` key). `tracklist` supports either a simple flat list, or grouped sections (`title` + `tracks`) for A/B sides.
 
 
 ### 4. Add Images

@@ -1,7 +1,7 @@
 ---
 title: "Midnight Dreaming"
 author: "self"
-date: "A 2025-01-01, B 2025-06-02"
+date_recorded: "A 2025-01-01, B 2025-06-02"
 length: "90 minutes"
 genre: "Shoegaze / Dream Pop"
 tags:
