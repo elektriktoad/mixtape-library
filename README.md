@@ -58,6 +58,7 @@ Create markdown files in `_tapes/`, one for each tape:
 ---
 title: "Midnight Dreaming"
 author: "self"
+date_recorded: "2023-04-03"
 length: "90 minutes"
 genre: "Shoegaze / Dream Pop"
 tags:
@@ -70,22 +71,32 @@ dolby: "Dolby B"
 front_image: "midnight-dreaming-front.jpg"
 back_image: "midnight-dreaming-back.jpg"
 tracklist:
-  - "Slowdive - Alison"
-  - "My Bloody Valentine - When You Sleep"
+  - title: "Side A"
+    tracks:
+      - "Slowdive - Alison"
+      - "My Bloody Valentine - When You Sleep"
+  - title: "Side B"
+    tracks:
+      - "Cocteau Twins - Cherry-Coloured Funk"
+      - "Ride - Vapour Trail"
 ---
 ```
+
+Use `date_recorded` for date text (avoid Jekyll's reserved `date` key). `tracklist` supports either a simple flat list, or grouped sections (`title` + `tracks`) for A/B sides.
 
 
 ### 4. Add Images
 
-Save cover photos to `/images/` matching your tape filenames. Recommended: 600x900px (2:3 vertical aspect ratio), JPEG format. Up to two images per tape are supported. Leave the back_image field blank in the tapename.md file to omit.
+Save cover photos to `/images/` matching your tape filenames. Recommended: 600x900px (2:3 vertical aspect ratio), JPEG format. Up to two images per tape are supported. Leave the back_image field blank in the tape markdown file to omit.
 
 ## Key Files
 
 - **`_data/settings.yml`** - Your info, theme colors, exchange policies
 - **`_data/tape_options.yml`** - Available tape types, Dolby options, genres
-- **`_tapes/`** - Add your tape markdown files here
-- **`images/`** - Add your tape cover photos here
+- **`_tapes/`** - Add your personal tape markdown files here (takes precedence over `sample_tapes/`)
+- **`sample_tapes/`** - Example tapes; only used if `_tapes/` is empty
+- **`images/`** - Add your personal tape cover photos here
+- **`sample_images/`** - Example images; used only by sample tapes
 
 ## Local Development (Optional)
 
@@ -99,7 +110,7 @@ bundle exec jekyll serve
 
 ## Updating from Template
 
-To pull template improvements into your fork:
+To pull template improvements into your fork without conflicts:
 
 ```bash
 git remote add upstream https://github.com/jbartolotti/mixtape-library-template.git
@@ -107,7 +118,10 @@ git fetch upstream
 git merge upstream/main
 ```
 
-Your content in `_tapes/`, `images/`, and `_data/settings.yml` won't be affected.
+**Important:** If you've added tapes to `_tapes/`, the template will automatically use those instead of the sample tapes in `sample_tapes/`. This means:
+- Your personal tapes are never overwritten during merges
+- Template updates to `sample_tapes/` won't conflict with your content
+- If you delete all your personal tapes, the catalog will display `sample_tapes/` as a fallback
 
 ## Troubleshooting
 
