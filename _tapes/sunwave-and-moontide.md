@@ -3,7 +3,7 @@ title: "Sunwave and Moontide"
 author: "self"
 length: "45 minutes"
 genre: "video game, new wave"
-date_recorded: "A: 2024-04-19, B: 2024-06-28"
+date_recorded: "A 2024-04-19, B 2024-06-28"
 tags:
   - "video game"
 description: "An energetic, moody mix drawing heavily on video game music, along with some New Wave and City Pop. Recorded to type II tape with type I bias and subsequently digitized. Side A recorded on a clock radio with an FM transmitter, side B recorded on a Sony CFD-S05 boombox. Can combine with any other C45s to make a C90. Album art created by AI."

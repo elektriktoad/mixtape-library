@@ -3,7 +3,7 @@ title: "Pastel Punk"
 author: "self"
 length: "60 minutes"
 genre: "Indie, Punk, World"
-date: "2025-08"
+date_recorded: "2025-08"
 tags:
   - "indie"
 description: "All female groups, with a mix of genres from punk, to indie, to JPop, KPop and more. Recorded to TDK D60 using a Sony CFD-S05 Boombox, Sony TC-WE825S Cassette Deck, and a Magnavox MX1180 Turntable Cassette Stereo from digital, CD, tape, and vinyl sources. J-card is part of a cassette index card art series I imported from Japan."
