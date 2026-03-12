@@ -6,7 +6,7 @@ genre: "city pop"
 date: "2024-07-03"
 tags:
   - "city pop"
-description: "City pop selections primarily from Pacific Breeze 1, 2, 3, and elsewhere. Recorded to type ii tape with type i bias on a Sony CFD-S05 boombox from CD source. Can request to combine it with another c45 to get a c90."
+description: "City pop selections primarily from Pacific Breeze 1, 2, 3, and elsewhere. Recorded to type ii tape with type i bias on a Sony CFD-S05 boombox from CD source. Can request to combine it with another c45 to get a c90. Album art by my kids."
 requestable: true
 tape_type: "Type II"
 dolby: "None"
