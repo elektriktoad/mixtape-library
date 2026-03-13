@@ -1,0 +1,42 @@
+---
+title: "80s Pop"
+author: "Annette"
+length: "90 minutes"
+genre: "Pop"
+date: "198X, obtained 2025-12-05"
+tags:
+  - "vintage"
+description: "Obtained from an estate sale. I believe the creator made this as a teen in the late 80s, and it's a fun, energetic time capsule. Originally recorded on a TDK SA90."
+requestable: true
+tape_type: "Type II"
+dolby: "None"
+front_image: "80s-pop-front.jpg"
+tracklist:
+  - title: "A"
+    tracks:
+    - "The Reflex - Duran Duran"
+    - "Don't Answer Me - The Alan Parsons Project"
+    - "Haven't We Been Here Before - Styx"
+    - "New Moon on Monday - Duran Duran"
+    - "Pretty Woman - Roy Orbison"
+    - "Twist and Shout - The Beatles"
+    - "The Union of the Snake - Duran Duran"
+    - "Old Time Rock 'n Roll - Bob Seger"
+    - "Radio Gaga - Queen"
+    - "Music Time - Styx"
+    - "Uptown Girl - Billy Joel"
+    - "Think of Laura - Christopher Cross"
+  - title: "B"
+    tracks:
+    - "Ghostbusters - Ray Parker Jr."
+    - "Sad Songs - Elton John"
+    - "The Heart of Rock 'n Roll - Huey Lewis & The News"
+    - "Holding Out For a Hero - Bonnie Tyler"
+    - "Bop Til You Drop - The Ramones"
+    - "Girls With Guns - Tommy Shaw"
+    - "If This is it - Huey Lewis & The News"
+    - "Let's Go Crazy - Prince and the Revolution"
+    - "I Go Insane - Lindsey Buckingham"
+    - "High On Emotion - Chris De Burgh"
+    - "Desert Moon - Dennis DeYoung"
+---
