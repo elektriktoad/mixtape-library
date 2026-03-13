@@ -3,7 +3,7 @@ title: "80s Pop"
 author: "Annette"
 length: "90 minutes"
 genre: "Pop"
-date: "198X, obtained 2025-12-05"
+date_recorded: "198X, obtained 2025-12-05"
 tags:
   - "vintage"
 description: "Obtained from an estate sale. I believe the creator made this as a teen in the late 80s, and it's a fun, energetic time capsule. Originally recorded on a TDK SA90."

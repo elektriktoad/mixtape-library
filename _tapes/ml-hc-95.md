@@ -3,7 +3,7 @@ title: "ML HC 95 in 3D Sound"
 author: "A Milwaukee Teen"
 length: "90 minutes"
 genre: "classic rock, alt-pop"
-date: "1995, obtained 2026-02"
+date_recorded: "1995, obtained 2026-02"
 tags:
   - "vintage"
 description: "Discovered on the side of the road in Milwaukee. Looks to be a mixtape someone made in volume to distribute to their high school class of 95, like the soundtrack to a high school dance. Very 90's teen romantic."
