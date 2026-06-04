@@ -1,0 +1,41 @@
+---
+title: "The Water Cycle"
+author: "Self"
+length: "90 minutes"
+genre: "Alternative, Gothic, Dream-Pop"
+date_recorded: "2026-04"
+tags:
+  - "gothic"
+description: "A tape designed around the theme of 'Rain'. Side A takes us from clouds, to a storm, to rapidly rising flood waters. Side B follows water's journey from the disaster along a river to the sea, where it evaporates and forms new clouds to start the cycle anew."
+requestable: true
+tape_type: "Type II"
+dolby: "None"
+front_image: "the-water-cycle-front.jpg"
+tracklist:
+  - title: "A"
+    tracks:
+    - "Air Man - iSometimesWriteMusic"
+    - "Cloud - Fischerspooner"
+    - "Cloudburst on Shingle Street - Thomas Dolby"
+    - "Raindrops and Sunshowers - The Smashing Pumpkins"
+    - "It's Coming Down - Cake"
+    - "Calming Water - Ceremony"
+    - "Lightning Strikes (Not Once But Twice) - The Clash"
+    - "Flood - Sisters of Mercy"
+    - "Shallow Water - Wild Nothing"
+    - "Underwater - Architecture in Helsinki"
+    - "Sink to the Bottom With You - Dragon Inn 3"
+    - "The Drowning Man - The Cure"
+  - title: "B"
+    tracks:
+    - "Haunted Water - Spellling"
+    - "Groundwater - Glare of the Sun"
+    - "Lost River - Ultravivid"
+    - "Water - Dinosaur Jr."
+    - "From the Edge of the Deep Green Sea - The Cure"
+    - "La Mer - NIN"
+    - "Evaporate - 9 Theory & Torii Wolf"
+    - "In the Clouds - All About Eve"
+    - "Ultrasky - Alison Goldfrapp"
+    - "Rainbow Road - Mario Kart Wii"
+---
