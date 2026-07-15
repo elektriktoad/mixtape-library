@@ -1,0 +1,45 @@
+---
+title: "A Bird's Life"
+author: "self"
+length: "90 minutes"
+genre: "indie, classic rock"
+date: "2026-06-25"
+tags:
+  - "indie"
+  - "classic rock"
+description: "Mixtape created around the theme of 'Bird'. The A side follows a caged bird's newfound freedom and migration to new lands. On the B side the bird starts a family, and watches the tiny birds grow and take flight themselves."
+requestable: true
+tape_type: "Type II"
+dolby: "None"
+front_image: "a-birds-life-front.jpg"
+back_image: "a-birds-life-back.jpg"
+tracklist:
+  - title: "A: Take Flight"
+    tracks:
+    - "City Bird - Of Montreal"
+    - "Song of a Caged Bird - Lindsey Stirling"
+    - "Escape - i-dle"
+    - "Through Windows - Wild Nothing"
+    - "Soar - Aqyila"
+    - "Bird on a Wire - Rogue Wave"
+    - "The Flock - David Maxim Micic"
+    - "Autumn Chill - Hexmouth"
+    - "Migration Feathers - General Elektriks"
+    - "Flying North - Thomas Dolby"
+    - "Rainbow Paradise - Masayoshi Takanaka"
+  - title: "B: Roost"
+    tracks:
+    - "Songbirds - Silversun Pickups"
+    - "Birds of a Feather - Billie Ellish"
+    - "Love Bird - Lodive"
+    - "The Little Black Egg - The Cars"
+    - "The Hatching - Pandy Martinez"
+    - "A Hungry Bird - Thom Manno"
+    - "Early Bird - The Eagles"
+    - "The Worm - Audioslave"
+    - "Feeding Time - Less Than Perfect"
+    - "Fledglings - Scale and Feather"
+    - "First Flight - Dept"
+    - "Empty Nest - Silversun Pickups"
+   
+---
