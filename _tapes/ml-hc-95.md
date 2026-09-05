@@ -10,6 +10,7 @@ description: "Discovered on the side of the road in Milwaukee. Looks to be a mix
 requestable: true
 tape_type: "Type I"
 dolby: "None"
+cover_image: "ml-hc-95-cover.jpg"
 front_image: "ml-hc-95-front.jpg"
 back_image: "ml-hc-95-back.jpg"
 tracklist:

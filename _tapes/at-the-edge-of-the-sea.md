@@ -1,0 +1,45 @@
+---
+title: "At the Edge of the Sea"
+author: "self"
+length: "90 minutes"
+genre: "new wave, synth pop"
+date_recorded: "2026-08"
+tags:
+  - "new wave"
+  - "synth pop"
+description: "Tape created for a mixtape exchange with the theme of Ocean Breathes Salty. The A side imagines a day at the beach in the sun and waves, while the B side dives deep into the ocean, before rescue and resurfacing."
+requestable: true
+tape_type: "Type II"
+dolby: "None"
+cover_image: "at-the-edge-of-the-sea-cover.jpg"
+front_image: "at-the-edge-of-the-sea-front.jpg"
+back_image: "at-the-edge-of-the-sea-back.jpg"
+tracklist:
+  - title: "A: Shore Light"
+    tracks:
+    - "On the Beach - Comsat Angels"
+    - "Always the Sun - The Stranglers"
+    - "Sunbathing - Lush"
+    - "Burning Up - A Flock of Seagulls"
+    - "Standing on the Shore - Empire of the Sun"
+    - "Swim - Victories at Sea"
+    - "Across the Sea - Information Society"
+    - "Tidepool - Terry Pidsadny"
+    - "Seashell - Paul Hayworth"
+    - "Pulling Mussels From a Shell - Squeeze"
+    - "The Last Day of Summer - The Cure"
+  - title: "B: Dark Depths"
+    tracks:
+    - "Ocean - Alison Goldfrapp"
+    - "Dive - Beach House"
+    - "Deep Waters - White Noise TV"
+    - "Looking for Atlantis - Prefab Sprout"
+    - "One of our Submarines - Thomas Dolby"
+    - "Sink to the Bottom With You - Dragon Inn 3"
+    - "Into the Light - Siouxsie and the Banshees"
+    - "Rescue - Echo and the Bunnymen"
+    - "Breath of Life - Erasure"
+    - "Head Above Water - Men Without Hats"
+    - "True Faith - New Order"
+   
+---

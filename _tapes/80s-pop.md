@@ -10,6 +10,7 @@ description: "Obtained from an estate sale. I believe the creator made this as a
 requestable: true
 tape_type: "Type II"
 dolby: "None"
+cover_image: "80s-pop-cover.jpg"
 front_image: "80s-pop-front.jpg"
 tracklist:
   - title: "A"

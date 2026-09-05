@@ -10,6 +10,7 @@ description: "Designed for a 'Cosmic' theme. "
 requestable: true
 tape_type: "Type I"
 dolby: "None"
+cover_image: "to-the-moon-and-back-front.jpg"
 front_image: "to-the-moon-and-back-front.jpg"
 tracklist:
   - title: "A"

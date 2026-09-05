@@ -10,6 +10,7 @@ description: "Inspired by synth-pop across time and space, drawing on music from
 requestable: true
 tape_type: "Type I"
 dolby: "None"
+cover_image: "cosmic-wave-front.jpg"
 front_image: "cosmic-wave-front.jpg"
 back_image: ""
 tracklist:

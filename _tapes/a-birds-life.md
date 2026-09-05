@@ -3,7 +3,7 @@ title: "A Bird's Life"
 author: "self"
 length: "90 minutes"
 genre: "indie, classic rock"
-date: "2026-06-25"
+date_recorded: "2026-06-25"
 tags:
   - "indie"
   - "classic rock"
@@ -11,6 +11,7 @@ description: "Mixtape created around the theme of 'Bird'. The A side follows a c
 requestable: true
 tape_type: "Type II"
 dolby: "None"
+cover_image: "a-birds-life-cover.jpg"
 front_image: "a-birds-life-front.jpg"
 back_image: "a-birds-life-back.jpg"
 tracklist:

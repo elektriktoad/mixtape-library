@@ -3,13 +3,14 @@ title: "Dead Air Disco"
 author: "self"
 length: "90 minutes"
 genre: "indie, electronic"
-date: "2025-11-25"
+date_recorded: "2025-11-25"
 tags:
   - "indie, electronic"
 description: "This mix is anchored in the mid 2000's indie rock and electronic music that I got from my time DJ-ing at a college radio station. No one listened to my show but I blasted it out there while ripping CDs all the same. J-card is part of a cassette index card art series I imported from Japan."
 requestable: true
 tape_type: "Type II"
 dolby: "None"
+cover_image: "dead-air-disco-front.jpg"
 front_image: "dead-air-disco-front.jpg"
 tracklist:
   - title: "A"

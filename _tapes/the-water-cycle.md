@@ -10,6 +10,7 @@ description: "A tape designed around the theme of 'Rain'. Side A takes us from c
 requestable: true
 tape_type: "Type II"
 dolby: "None"
+cover_image: "the-water-cycle-front.jpg"
 front_image: "the-water-cycle-front.jpg"
 tracklist:
   - title: "A"

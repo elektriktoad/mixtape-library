@@ -3,13 +3,14 @@ title: "BURNING HOT!!!!"
 author: "Ed"
 length: "x minutes"
 genre: "R&B, disco"
-date: "Acquired 2024-07-20"
+date_recorded: "Acquired 2024-07-20"
 tags:
   - "vintage"
 description: "I acquired this in a garage sale lot, fifty tapes for $1. It's full of 1980 summer/fall disco and R&B hits, with a smooth-talking DJ introducing each track. I believe it's homemade, as there are no interruptions or radio station IDs. This tape is a gem."
 requestable: true
 tape_type: "Type II"
 dolby: "B"
+cover_image: "burning-hot-cover.jpg"
 front_image: "burning-hot-front.jpg"
 tracklist:
   - title: "A"

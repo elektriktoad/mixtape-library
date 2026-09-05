@@ -10,6 +10,7 @@ description: "All female groups, with a mix of genres from punk, to indie, to JP
 requestable: true
 tape_type: "Type I"
 dolby: "None"
+cover_image: "pastel-punk-cover.jpg"
 front_image: "pastel-punk-front.jpg"
 back_image: "pastel-punk-back.jpg"
 tracklist:

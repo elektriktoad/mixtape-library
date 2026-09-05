@@ -3,7 +3,7 @@ title: "Falling Light"
 author: "self"
 length: "90 minutes"
 genre: "New Wave, alternative, dream pop, indie"
-date: "2026-07-10"
+date_recorded: "2026-07-10"
 tags:
   - "new wave"
   - "dream pop"
@@ -12,6 +12,7 @@ description: "New Wave and Alternative on side A, and Dream pop with 2000's indi
 requestable: true
 tape_type: "Type II"
 dolby: "None"
+cover_image: "falling-light-cover.jpg"
 front_image: "falling-light-front.jpg"
 back_image: "falling-light-back.jpg"
 tracklist:

@@ -3,13 +3,14 @@ title: "Pixelate"
 author: "self"
 length: "60 minutes"
 genre: "video game, new wave"
-date: "2024-08-31"
+date_recorded: "2024-08-31"
 tags:
   - "video game"
 description: "A mix I made for my brother that draws heavily on retro games and the new wave music our dad listened to when we were kids. Digital master. J-card is part of a cassette index card art series I imported from Japan."
 requestable: true
 tape_type: "Type I"
 dolby: "None"
+cover_image: "pixelate-front.jpg"
 front_image: "pixelate-front.jpg"
 tracklist:
   - title: "A"

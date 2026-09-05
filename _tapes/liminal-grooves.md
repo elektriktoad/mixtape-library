@@ -3,13 +3,14 @@ title: "Liminal Grooves"
 author: "self"
 length: "90 minutes"
 genre: "new wave, electronic"
-date: "2025-11-25"
+date_recorded: "2025-11-25"
 tags:
   - "new wave, electronic"
 description: "I designed this for a mixtape exchange, it straddles the line between New Wave synths and funky House and Disco. Side A features men and Side B women vocalists, with each side mixing top hits, indie groups, and small local bands. J-card is part of a cassette index card art series I imported from Japan."
 requestable: true
 tape_type: "Type II"
 dolby: "None"
+cover_image: "liminal-grooves-front.jpg"
 front_image: "liminal-grooves-front.jpg"
 back_image: "liminal-grooves-back.jpg"
 tracklist:

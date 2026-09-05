@@ -10,6 +10,7 @@ description: "Designed for a 'Covers' theme. "
 requestable: true
 tape_type: "Type II"
 dolby: "None"
+cover_image: "renew-wave-cover.jpg"
 front_image: "renew-wave-front.jpg"
 tracklist:
   - title: "A, Covers"

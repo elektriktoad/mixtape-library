@@ -1,0 +1,47 @@
+---
+title: "Satellite"
+author: "self"
+length: "90 minutes"
+genre: ""
+date_recorded: "2026-08"
+tags:
+  - "alternative"
+description: "Satellite is a weirdly common name for songs. Twenty-five of them are collected here for your listening pleasure."
+requestable: true
+tape_type: "Type II"
+dolby: "None"
+cover_image: "satellite-cover.jpg"
+front_image: "satellite-front.jpg"
+back_image: "satellite-back.jpg"
+tracklist:
+  - title: "A"
+    tracks:
+    - "Satellite - Guster"
+    - "Satellite - Khalid"
+    - "Satellites - Little Boots"
+    - "Satellite - Mew"
+    - "Satellite - Suzy"
+    - "Satellite - The Get Up Kids"
+    - "Satellite - Rise Against"
+    - "Satellite - Def Leppard"
+    - "Satellite - NIN"
+    - "Satellite - ICEHOUSE"
+    - "Satellite - The Hooters"
+    - "Satellit - Ted Gardestad"
+  - title: "B"
+    tracks:
+    - "Satellite - Lena"
+    - "Satellite - Bebe Rexha & Snoop Dogg"
+    - "Satellite - The Beloved"
+    - "Satellites - September"
+    - "Satellite - LOONA"
+    - "Satellite - Strfkr"
+    - "Satellite - All Time Low"
+    - "Satellite - The Night Flight Orchestra"
+    - "Satellite - Catherine Wheel"
+    - "Satellite - EchoDroides"
+    - "Satellite - Orchestral Manoeuvres in the Dark"
+    - "Satellite - Harry Styles"
+    - "Satellites - Beyoncé"
+   
+---
