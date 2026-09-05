@@ -10,9 +10,9 @@ description: "A sampling of artists from Lawrence, KS and the surrounding area t
 requestable: true
 tape_type: "Type II"
 dolby: "None"
-cover_image: "lawrence-cover.jpg"
-front_image: "lawrence-front.jpg"
-back_image: "lawrence-back.jpg"
+cover_image: "lawrence-cover.png"
+front_image: "lawrence-front.png"
+back_image: "lawrence-back.png"
 tracklist:
   - title: "A"
     tracks:

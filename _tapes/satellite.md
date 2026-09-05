@@ -10,7 +10,7 @@ description: "Satellite is a weirdly common name for songs. Twenty-five of them 
 requestable: true
 tape_type: "Type II"
 dolby: "None"
-cover_image: "satellite-cover.jpg"
+cover_image: "satellite-cover.png"
 front_image: "satellite-front.jpg"
 back_image: "satellite-back.jpg"
 tracklist:
